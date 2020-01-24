@@ -98,6 +98,59 @@ expr6 =
 {expr_var} var |
 //{expr_appel} appel;
 
+df =
+{def_fct} id par_o ldv par_f espace ldvo epsace ibloc;
+
+ldf =
+{ldf_dv} df ldf |
+{ldf_vide} ;
+
+
+inst =
+{iapp} iapp |
+{iaff} iaff |
+{isi} isi |
+{itq} itq |
+{ibloc} ibloc |
+{irec} irec;
+
+inst_bloc =
+{iapp} iapp |
+{iaff} iaff |
+{isi} isi |
+{itq} itq |
+{iret} iret;
+
+
+iapp =
+{app} app;
+
+iaff =
+{aff} var egal expr pvir;
+
+isi =
+{inst_si} si expr al ibloc |
+{inst_si_sin} si expr al ibloc sin ibloc;
+
+
+itq =
+{inst_tq} tq expr fai ibloc;
+
+iret =
+{inst_ret}  ret expr pvir;
+
+
+app =
+{app_lde} id par_o lde par_f pvir;
+
+ibloc =
+{ldi} acc_o ldi acc_f;
+
+ldi =
+{ldi_list} inst_bloc ldi |
+{ldi_inst} inst_bloc |
+{ldi_vide} ;
+
 
 
 //programme = optdecvar listedecfonc ;
