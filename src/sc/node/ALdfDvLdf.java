@@ -5,22 +5,22 @@ package sc.node;
 import sc.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProgramme extends PProgramme
+public final class ALdfDvLdf extends PLdf
 {
-    private PLdvo _ldvo_;
+    private PDf _df_;
     private PLdf _ldf_;
 
-    public AProgramme()
+    public ALdfDvLdf()
     {
         // Constructor
     }
 
-    public AProgramme(
-        @SuppressWarnings("hiding") PLdvo _ldvo_,
+    public ALdfDvLdf(
+        @SuppressWarnings("hiding") PDf _df_,
         @SuppressWarnings("hiding") PLdf _ldf_)
     {
         // Constructor
-        setLdvo(_ldvo_);
+        setDf(_df_);
 
         setLdf(_ldf_);
 
@@ -29,27 +29,27 @@ public final class AProgramme extends PProgramme
     @Override
     public Object clone()
     {
-        return new AProgramme(
-            cloneNode(this._ldvo_),
+        return new ALdfDvLdf(
+            cloneNode(this._df_),
             cloneNode(this._ldf_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAProgramme(this);
+        ((Analysis) sw).caseALdfDvLdf(this);
     }
 
-    public PLdvo getLdvo()
+    public PDf getDf()
     {
-        return this._ldvo_;
+        return this._df_;
     }
 
-    public void setLdvo(PLdvo node)
+    public void setDf(PDf node)
     {
-        if(this._ldvo_ != null)
+        if(this._df_ != null)
         {
-            this._ldvo_.parent(null);
+            this._df_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +62,7 @@ public final class AProgramme extends PProgramme
             node.parent(this);
         }
 
-        this._ldvo_ = node;
+        this._df_ = node;
     }
 
     public PLdf getLdf()
@@ -94,7 +94,7 @@ public final class AProgramme extends PProgramme
     public String toString()
     {
         return ""
-            + toString(this._ldvo_)
+            + toString(this._df_)
             + toString(this._ldf_);
     }
 
@@ -102,9 +102,9 @@ public final class AProgramme extends PProgramme
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._ldvo_ == child)
+        if(this._df_ == child)
         {
-            this._ldvo_ = null;
+            this._df_ = null;
             return;
         }
 
@@ -121,9 +121,9 @@ public final class AProgramme extends PProgramme
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._ldvo_ == oldChild)
+        if(this._df_ == oldChild)
         {
-            setLdvo((PLdvo) newChild);
+            setDf((PDf) newChild);
             return;
         }
 

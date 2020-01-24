@@ -5,51 +5,51 @@ package sc.node;
 import sc.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProgramme extends PProgramme
+public final class ALdiListLdi extends PLdi
 {
-    private PLdvo _ldvo_;
-    private PLdf _ldf_;
+    private PInstBloc _instBloc_;
+    private PLdi _ldi_;
 
-    public AProgramme()
+    public ALdiListLdi()
     {
         // Constructor
     }
 
-    public AProgramme(
-        @SuppressWarnings("hiding") PLdvo _ldvo_,
-        @SuppressWarnings("hiding") PLdf _ldf_)
+    public ALdiListLdi(
+        @SuppressWarnings("hiding") PInstBloc _instBloc_,
+        @SuppressWarnings("hiding") PLdi _ldi_)
     {
         // Constructor
-        setLdvo(_ldvo_);
+        setInstBloc(_instBloc_);
 
-        setLdf(_ldf_);
+        setLdi(_ldi_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AProgramme(
-            cloneNode(this._ldvo_),
-            cloneNode(this._ldf_));
+        return new ALdiListLdi(
+            cloneNode(this._instBloc_),
+            cloneNode(this._ldi_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAProgramme(this);
+        ((Analysis) sw).caseALdiListLdi(this);
     }
 
-    public PLdvo getLdvo()
+    public PInstBloc getInstBloc()
     {
-        return this._ldvo_;
+        return this._instBloc_;
     }
 
-    public void setLdvo(PLdvo node)
+    public void setInstBloc(PInstBloc node)
     {
-        if(this._ldvo_ != null)
+        if(this._instBloc_ != null)
         {
-            this._ldvo_.parent(null);
+            this._instBloc_.parent(null);
         }
 
         if(node != null)
@@ -62,19 +62,19 @@ public final class AProgramme extends PProgramme
             node.parent(this);
         }
 
-        this._ldvo_ = node;
+        this._instBloc_ = node;
     }
 
-    public PLdf getLdf()
+    public PLdi getLdi()
     {
-        return this._ldf_;
+        return this._ldi_;
     }
 
-    public void setLdf(PLdf node)
+    public void setLdi(PLdi node)
     {
-        if(this._ldf_ != null)
+        if(this._ldi_ != null)
         {
-            this._ldf_.parent(null);
+            this._ldi_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +87,30 @@ public final class AProgramme extends PProgramme
             node.parent(this);
         }
 
-        this._ldf_ = node;
+        this._ldi_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._ldvo_)
-            + toString(this._ldf_);
+            + toString(this._instBloc_)
+            + toString(this._ldi_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._ldvo_ == child)
+        if(this._instBloc_ == child)
         {
-            this._ldvo_ = null;
+            this._instBloc_ = null;
             return;
         }
 
-        if(this._ldf_ == child)
+        if(this._ldi_ == child)
         {
-            this._ldf_ = null;
+            this._ldi_ = null;
             return;
         }
 
@@ -121,15 +121,15 @@ public final class AProgramme extends PProgramme
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._ldvo_ == oldChild)
+        if(this._instBloc_ == oldChild)
         {
-            setLdvo((PLdvo) newChild);
+            setInstBloc((PInstBloc) newChild);
             return;
         }
 
-        if(this._ldf_ == oldChild)
+        if(this._ldi_ == oldChild)
         {
-            setLdf((PLdf) newChild);
+            setLdi((PLdi) newChild);
             return;
         }
 

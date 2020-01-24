@@ -5,51 +5,51 @@ package sc.node;
 import sc.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProgramme extends PProgramme
+public final class ALdeListLde extends PLde
 {
-    private PLdvo _ldvo_;
-    private PLdf _ldf_;
+    private PExpr _expr_;
+    private PLde _lde_;
 
-    public AProgramme()
+    public ALdeListLde()
     {
         // Constructor
     }
 
-    public AProgramme(
-        @SuppressWarnings("hiding") PLdvo _ldvo_,
-        @SuppressWarnings("hiding") PLdf _ldf_)
+    public ALdeListLde(
+        @SuppressWarnings("hiding") PExpr _expr_,
+        @SuppressWarnings("hiding") PLde _lde_)
     {
         // Constructor
-        setLdvo(_ldvo_);
+        setExpr(_expr_);
 
-        setLdf(_ldf_);
+        setLde(_lde_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AProgramme(
-            cloneNode(this._ldvo_),
-            cloneNode(this._ldf_));
+        return new ALdeListLde(
+            cloneNode(this._expr_),
+            cloneNode(this._lde_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAProgramme(this);
+        ((Analysis) sw).caseALdeListLde(this);
     }
 
-    public PLdvo getLdvo()
+    public PExpr getExpr()
     {
-        return this._ldvo_;
+        return this._expr_;
     }
 
-    public void setLdvo(PLdvo node)
+    public void setExpr(PExpr node)
     {
-        if(this._ldvo_ != null)
+        if(this._expr_ != null)
         {
-            this._ldvo_.parent(null);
+            this._expr_.parent(null);
         }
 
         if(node != null)
@@ -62,19 +62,19 @@ public final class AProgramme extends PProgramme
             node.parent(this);
         }
 
-        this._ldvo_ = node;
+        this._expr_ = node;
     }
 
-    public PLdf getLdf()
+    public PLde getLde()
     {
-        return this._ldf_;
+        return this._lde_;
     }
 
-    public void setLdf(PLdf node)
+    public void setLde(PLde node)
     {
-        if(this._ldf_ != null)
+        if(this._lde_ != null)
         {
-            this._ldf_.parent(null);
+            this._lde_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +87,30 @@ public final class AProgramme extends PProgramme
             node.parent(this);
         }
 
-        this._ldf_ = node;
+        this._lde_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._ldvo_)
-            + toString(this._ldf_);
+            + toString(this._expr_)
+            + toString(this._lde_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._ldvo_ == child)
+        if(this._expr_ == child)
         {
-            this._ldvo_ = null;
+            this._expr_ = null;
             return;
         }
 
-        if(this._ldf_ == child)
+        if(this._lde_ == child)
         {
-            this._ldf_ = null;
+            this._lde_ = null;
             return;
         }
 
@@ -121,15 +121,15 @@ public final class AProgramme extends PProgramme
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._ldvo_ == oldChild)
+        if(this._expr_ == oldChild)
         {
-            setLdvo((PLdvo) newChild);
+            setExpr((PExpr) newChild);
             return;
         }
 
-        if(this._ldf_ == oldChild)
+        if(this._lde_ == oldChild)
         {
-            setLdf((PLdf) newChild);
+            setLde((PLde) newChild);
             return;
         }
 

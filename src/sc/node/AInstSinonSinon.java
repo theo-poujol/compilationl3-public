@@ -5,51 +5,51 @@ package sc.node;
 import sc.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProgramme extends PProgramme
+public final class AInstSinonSinon extends PSinon
 {
-    private PLdvo _ldvo_;
-    private PLdf _ldf_;
+    private TSin _sin_;
+    private PIbloc _ibloc_;
 
-    public AProgramme()
+    public AInstSinonSinon()
     {
         // Constructor
     }
 
-    public AProgramme(
-        @SuppressWarnings("hiding") PLdvo _ldvo_,
-        @SuppressWarnings("hiding") PLdf _ldf_)
+    public AInstSinonSinon(
+        @SuppressWarnings("hiding") TSin _sin_,
+        @SuppressWarnings("hiding") PIbloc _ibloc_)
     {
         // Constructor
-        setLdvo(_ldvo_);
+        setSin(_sin_);
 
-        setLdf(_ldf_);
+        setIbloc(_ibloc_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AProgramme(
-            cloneNode(this._ldvo_),
-            cloneNode(this._ldf_));
+        return new AInstSinonSinon(
+            cloneNode(this._sin_),
+            cloneNode(this._ibloc_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAProgramme(this);
+        ((Analysis) sw).caseAInstSinonSinon(this);
     }
 
-    public PLdvo getLdvo()
+    public TSin getSin()
     {
-        return this._ldvo_;
+        return this._sin_;
     }
 
-    public void setLdvo(PLdvo node)
+    public void setSin(TSin node)
     {
-        if(this._ldvo_ != null)
+        if(this._sin_ != null)
         {
-            this._ldvo_.parent(null);
+            this._sin_.parent(null);
         }
 
         if(node != null)
@@ -62,19 +62,19 @@ public final class AProgramme extends PProgramme
             node.parent(this);
         }
 
-        this._ldvo_ = node;
+        this._sin_ = node;
     }
 
-    public PLdf getLdf()
+    public PIbloc getIbloc()
     {
-        return this._ldf_;
+        return this._ibloc_;
     }
 
-    public void setLdf(PLdf node)
+    public void setIbloc(PIbloc node)
     {
-        if(this._ldf_ != null)
+        if(this._ibloc_ != null)
         {
-            this._ldf_.parent(null);
+            this._ibloc_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +87,30 @@ public final class AProgramme extends PProgramme
             node.parent(this);
         }
 
-        this._ldf_ = node;
+        this._ibloc_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._ldvo_)
-            + toString(this._ldf_);
+            + toString(this._sin_)
+            + toString(this._ibloc_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._ldvo_ == child)
+        if(this._sin_ == child)
         {
-            this._ldvo_ = null;
+            this._sin_ = null;
             return;
         }
 
-        if(this._ldf_ == child)
+        if(this._ibloc_ == child)
         {
-            this._ldf_ = null;
+            this._ibloc_ = null;
             return;
         }
 
@@ -121,15 +121,15 @@ public final class AProgramme extends PProgramme
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._ldvo_ == oldChild)
+        if(this._sin_ == oldChild)
         {
-            setLdvo((PLdvo) newChild);
+            setSin((TSin) newChild);
             return;
         }
 
-        if(this._ldf_ == oldChild)
+        if(this._ibloc_ == oldChild)
         {
-            setLdf((PLdf) newChild);
+            setIbloc((PIbloc) newChild);
             return;
         }
 

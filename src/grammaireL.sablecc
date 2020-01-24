@@ -93,13 +93,14 @@ expr5 =
 {expr6} expr6;
 
 expr6 =
-{expr_par} par_o expr par_f;
+{expr_par} par_o expr par_f |
 {expr_nb} nombre |
 {expr_var} var |
-//{expr_appel} appel;
+{expr_appel} app;
 
+//espace
 df =
-{def_fct} id par_o ldv par_f espace ldvo epsace ibloc;
+{def_fct} id par_o ldv par_f ldvo ibloc;
 
 ldf =
 {ldf_dv} df ldf |
@@ -112,7 +113,7 @@ inst =
 {isi} isi |
 {itq} itq |
 {ibloc} ibloc |
-{irec} irec;
+{iret} iret;
 
 inst_bloc =
 {iapp} iapp |
@@ -129,8 +130,12 @@ iaff =
 {aff} var egal expr pvir;
 
 isi =
-{inst_si} si expr al ibloc |
-{inst_si_sin} si expr al ibloc sin ibloc;
+{inst_si} si expr al ibloc sinon;
+
+sinon =
+{inst_sinon} sin ibloc |
+{sinon_vide} ;
+
 
 
 itq =
@@ -143,6 +148,11 @@ iret =
 app =
 {app_lde} id par_o lde par_f pvir;
 
+
+lde =
+{lde_list} expr lde |
+{lde_vide} ;
+
 ibloc =
 {ldi} acc_o ldi acc_f;
 
@@ -153,6 +163,5 @@ ldi =
 
 
 
-//programme = optdecvar listedecfonc ;
 
-//expr = nombre;
+programme = ldvo ldf ;
