@@ -4,6 +4,7 @@ Helpers
 
 lettre = [['a' .. 'z'] + ['A' .. 'Z']];
 nb = ['0' .. '9']+;
+symbs = '$' | '_';
 
 Tokens
 plus = '+';
@@ -33,7 +34,7 @@ fct = 'fonction';
 ecr = 'ecrire';
 lir = 'lire';
 ent = 'entier';
-id = lettre + (lettre | nb)+;
+id = lettre + (lettre | nb | symbs )+;
 nombre = nb;
 
 espace = (' ' | 13 | 10)+;
