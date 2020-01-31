@@ -8,7 +8,6 @@ import sc.analysis.*;
 public final class ADvDeriveDvar extends PDvar
 {
     private TEnt _ent_;
-    private TEspace _espace_;
     private TId _id_;
     private TCrochO _crochO_;
     private TNombre _nombre_;
@@ -21,7 +20,6 @@ public final class ADvDeriveDvar extends PDvar
 
     public ADvDeriveDvar(
         @SuppressWarnings("hiding") TEnt _ent_,
-        @SuppressWarnings("hiding") TEspace _espace_,
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TCrochO _crochO_,
         @SuppressWarnings("hiding") TNombre _nombre_,
@@ -29,8 +27,6 @@ public final class ADvDeriveDvar extends PDvar
     {
         // Constructor
         setEnt(_ent_);
-
-        setEspace(_espace_);
 
         setId(_id_);
 
@@ -47,7 +43,6 @@ public final class ADvDeriveDvar extends PDvar
     {
         return new ADvDeriveDvar(
             cloneNode(this._ent_),
-            cloneNode(this._espace_),
             cloneNode(this._id_),
             cloneNode(this._crochO_),
             cloneNode(this._nombre_),
@@ -83,31 +78,6 @@ public final class ADvDeriveDvar extends PDvar
         }
 
         this._ent_ = node;
-    }
-
-    public TEspace getEspace()
-    {
-        return this._espace_;
-    }
-
-    public void setEspace(TEspace node)
-    {
-        if(this._espace_ != null)
-        {
-            this._espace_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._espace_ = node;
     }
 
     public TId getId()
@@ -215,7 +185,6 @@ public final class ADvDeriveDvar extends PDvar
     {
         return ""
             + toString(this._ent_)
-            + toString(this._espace_)
             + toString(this._id_)
             + toString(this._crochO_)
             + toString(this._nombre_)
@@ -229,12 +198,6 @@ public final class ADvDeriveDvar extends PDvar
         if(this._ent_ == child)
         {
             this._ent_ = null;
-            return;
-        }
-
-        if(this._espace_ == child)
-        {
-            this._espace_ = null;
             return;
         }
 
@@ -272,12 +235,6 @@ public final class ADvDeriveDvar extends PDvar
         if(this._ent_ == oldChild)
         {
             setEnt((TEnt) newChild);
-            return;
-        }
-
-        if(this._espace_ == oldChild)
-        {
-            setEspace((TEspace) newChild);
             return;
         }
 

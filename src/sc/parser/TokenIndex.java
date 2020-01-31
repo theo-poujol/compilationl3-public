@@ -112,19 +112,19 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTSi(@SuppressWarnings("unused") TSi node)
+    public void caseTSin(@SuppressWarnings("unused") TSin node)
     {
         this.index = 17;
     }
 
     @Override
-    public void caseTAl(@SuppressWarnings("unused") TAl node)
+    public void caseTSi(@SuppressWarnings("unused") TSi node)
     {
         this.index = 18;
     }
 
     @Override
-    public void caseTSin(@SuppressWarnings("unused") TSin node)
+    public void caseTAl(@SuppressWarnings("unused") TAl node)
     {
         this.index = 19;
     }
@@ -184,14 +184,8 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTEspace(@SuppressWarnings("unused") TEspace node)
-    {
-        this.index = 29;
-    }
-
-    @Override
     public void caseEOF(@SuppressWarnings("unused") EOF node)
     {
-        this.index = 30;
+        this.index = 29;
     }
 }

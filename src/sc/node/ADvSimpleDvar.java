@@ -8,7 +8,6 @@ import sc.analysis.*;
 public final class ADvSimpleDvar extends PDvar
 {
     private TEnt _ent_;
-    private TEspace _espace_;
     private TId _id_;
 
     public ADvSimpleDvar()
@@ -18,13 +17,10 @@ public final class ADvSimpleDvar extends PDvar
 
     public ADvSimpleDvar(
         @SuppressWarnings("hiding") TEnt _ent_,
-        @SuppressWarnings("hiding") TEspace _espace_,
         @SuppressWarnings("hiding") TId _id_)
     {
         // Constructor
         setEnt(_ent_);
-
-        setEspace(_espace_);
 
         setId(_id_);
 
@@ -35,7 +31,6 @@ public final class ADvSimpleDvar extends PDvar
     {
         return new ADvSimpleDvar(
             cloneNode(this._ent_),
-            cloneNode(this._espace_),
             cloneNode(this._id_));
     }
 
@@ -70,31 +65,6 @@ public final class ADvSimpleDvar extends PDvar
         this._ent_ = node;
     }
 
-    public TEspace getEspace()
-    {
-        return this._espace_;
-    }
-
-    public void setEspace(TEspace node)
-    {
-        if(this._espace_ != null)
-        {
-            this._espace_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._espace_ = node;
-    }
-
     public TId getId()
     {
         return this._id_;
@@ -125,7 +95,6 @@ public final class ADvSimpleDvar extends PDvar
     {
         return ""
             + toString(this._ent_)
-            + toString(this._espace_)
             + toString(this._id_);
     }
 
@@ -136,12 +105,6 @@ public final class ADvSimpleDvar extends PDvar
         if(this._ent_ == child)
         {
             this._ent_ = null;
-            return;
-        }
-
-        if(this._espace_ == child)
-        {
-            this._espace_ = null;
             return;
         }
 
@@ -161,12 +124,6 @@ public final class ADvSimpleDvar extends PDvar
         if(this._ent_ == oldChild)
         {
             setEnt((TEnt) newChild);
-            return;
-        }
-
-        if(this._espace_ == oldChild)
-        {
-            setEspace((TEspace) newChild);
             return;
         }
 

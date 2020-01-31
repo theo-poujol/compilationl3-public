@@ -11,7 +11,6 @@ public final class AAppLdeApp extends PApp
     private TParO _parO_;
     private PLde _lde_;
     private TParF _parF_;
-    private TPvir _pvir_;
 
     public AAppLdeApp()
     {
@@ -22,8 +21,7 @@ public final class AAppLdeApp extends PApp
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TParO _parO_,
         @SuppressWarnings("hiding") PLde _lde_,
-        @SuppressWarnings("hiding") TParF _parF_,
-        @SuppressWarnings("hiding") TPvir _pvir_)
+        @SuppressWarnings("hiding") TParF _parF_)
     {
         // Constructor
         setId(_id_);
@@ -34,8 +32,6 @@ public final class AAppLdeApp extends PApp
 
         setParF(_parF_);
 
-        setPvir(_pvir_);
-
     }
 
     @Override
@@ -45,8 +41,7 @@ public final class AAppLdeApp extends PApp
             cloneNode(this._id_),
             cloneNode(this._parO_),
             cloneNode(this._lde_),
-            cloneNode(this._parF_),
-            cloneNode(this._pvir_));
+            cloneNode(this._parF_));
     }
 
     @Override
@@ -155,31 +150,6 @@ public final class AAppLdeApp extends PApp
         this._parF_ = node;
     }
 
-    public TPvir getPvir()
-    {
-        return this._pvir_;
-    }
-
-    public void setPvir(TPvir node)
-    {
-        if(this._pvir_ != null)
-        {
-            this._pvir_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._pvir_ = node;
-    }
-
     @Override
     public String toString()
     {
@@ -187,8 +157,7 @@ public final class AAppLdeApp extends PApp
             + toString(this._id_)
             + toString(this._parO_)
             + toString(this._lde_)
-            + toString(this._parF_)
-            + toString(this._pvir_);
+            + toString(this._parF_);
     }
 
     @Override
@@ -216,12 +185,6 @@ public final class AAppLdeApp extends PApp
         if(this._parF_ == child)
         {
             this._parF_ = null;
-            return;
-        }
-
-        if(this._pvir_ == child)
-        {
-            this._pvir_ = null;
             return;
         }
 
@@ -253,12 +216,6 @@ public final class AAppLdeApp extends PApp
         if(this._parF_ == oldChild)
         {
             setParF((TParF) newChild);
-            return;
-        }
-
-        if(this._pvir_ == oldChild)
-        {
-            setPvir((TPvir) newChild);
             return;
         }
 

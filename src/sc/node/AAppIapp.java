@@ -8,6 +8,7 @@ import sc.analysis.*;
 public final class AAppIapp extends PIapp
 {
     private PApp _app_;
+    private TPvir _pvir_;
 
     public AAppIapp()
     {
@@ -15,10 +16,13 @@ public final class AAppIapp extends PIapp
     }
 
     public AAppIapp(
-        @SuppressWarnings("hiding") PApp _app_)
+        @SuppressWarnings("hiding") PApp _app_,
+        @SuppressWarnings("hiding") TPvir _pvir_)
     {
         // Constructor
         setApp(_app_);
+
+        setPvir(_pvir_);
 
     }
 
@@ -26,7 +30,8 @@ public final class AAppIapp extends PIapp
     public Object clone()
     {
         return new AAppIapp(
-            cloneNode(this._app_));
+            cloneNode(this._app_),
+            cloneNode(this._pvir_));
     }
 
     @Override
@@ -60,11 +65,37 @@ public final class AAppIapp extends PIapp
         this._app_ = node;
     }
 
+    public TPvir getPvir()
+    {
+        return this._pvir_;
+    }
+
+    public void setPvir(TPvir node)
+    {
+        if(this._pvir_ != null)
+        {
+            this._pvir_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._pvir_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._app_);
+            + toString(this._app_)
+            + toString(this._pvir_);
     }
 
     @Override
@@ -74,6 +105,12 @@ public final class AAppIapp extends PIapp
         if(this._app_ == child)
         {
             this._app_ = null;
+            return;
+        }
+
+        if(this._pvir_ == child)
+        {
+            this._pvir_ = null;
             return;
         }
 
@@ -87,6 +124,12 @@ public final class AAppIapp extends PIapp
         if(this._app_ == oldChild)
         {
             setApp((PApp) newChild);
+            return;
+        }
+
+        if(this._pvir_ == oldChild)
+        {
+            setPvir((TPvir) newChild);
             return;
         }
 

@@ -3,7 +3,7 @@ Package sc;
 Helpers
 
 lettre = [['a' .. 'z'] + ['A' .. 'Z']];
-nb = ['0' .. '9']+;
+nb = ['0' .. '9'];
 symbs = '$' | '_';
 
 Tokens
@@ -34,59 +34,117 @@ fct = 'fonction';
 ecr = 'ecrire';
 lir = 'lire';
 ent = 'entier';
-id = lettre + (lettre | nb | symbs )*;
-nombre = nb;
+id = lettre lettre*;
+nombre = nb+;
 
 espace = (' ' | 13 | 10 )+;
 commentaire= '#' [[0 .. 0xffff] - [10 + 13]]* (10 | 13 | 10 13);
 
 Ignored Tokens
 
+espace,
 commentaire;
 
 Productions
 
-programme = ldvo ldf ;
+programme = ldvo ldf;
+
+ldvo =
+{list_var_opt} ldv pvir|
+{list_var_opt_vide}  ;
+
+ldv =
+{list_var_main} dvar ldv_alt |
+{list_var_main_vide} ;
+
+
+ldv_alt =
+{liste_var} vir dvar ldv_alt |
+{liste_vide_var} ;
+
+
+
+
+
+
+
+
+
+
+
+
+ldf =
+{ldf_dv} df ldf |
+{ldf_vide} ;
+
+df =
+{def_fct} id par_o ldv par_f  ldvo ibloc;
+
+ibloc =
+{ldi} acc_o ldi acc_f;
+
+ldi =
+{ldi_list} inst_bloc ldi |
+{ldi_vide} ;
+
+
+inst_bloc =
+{iapp} iapp |
+{iaff} iaff |
+{isi} isi |
+{itq} itq |
+{iret} iret |
+{ecriture} ecrire;
+//{lire} lir par_o par_f pvir;
+
+
+iapp =
+{app} app pvir;
+
+
+app =
+{app_lde} id par_o lde par_f;
+
+iaff =
+{aff} var egal expr pvir;
+
+isi =
+{inst_si} si expr al ibloc sinon;
+
+sinon =
+{inst_sinon} sin ibloc |
+{sinon_vide} ;
+
+itq =
+{inst_tq} tq expr fai ibloc;
+
+iret =
+{inst_ret}  ret expr pvir;
+
+
+
+
+
+
+
+
+
+
+
+
 
 var =
 {v_simple} id |
 {v_deriv} id croch_o nombre croch_f;
 
 dvar =
-{dv_simple} ent espace id|
-{dv_derive} ent espace id croch_o nombre croch_f;
-
-ldv_alt =
-{liste_var} vir dvar ldv_alt |
-{liste_vide_var} ;
-
-ldv =
-{list_var_main} dvar ldv_alt |
-{list_var_main_vide} ;
-
-ldvo =
-{list_var_opt} ldv pvir |
-{list_var_opt_vide}  ;
+{dv_simple} ent  id|
+{dv_derive} ent  id croch_o nombre croch_f;
 
 
-
-
-
-//espace
-df =
-{def_fct} id par_o ldv par_f espace ldvo ibloc;
-
-ldf =
-{ldf_dv} df ldf |
-{ldf_vide} ;
-
-ldi =
-{ldi_list} inst_bloc ldi |
-{ldi_inst} inst_bloc |
-{ldi_vide} ;
-
-ibloc =
-{ldi} acc_o ldi acc_f;
+lde =
+{lde_list} expr lde |
+{lde_vide} ;
 
 expr =
 {expr_ou} expr ou expr1  |
@@ -118,57 +176,9 @@ expr5 =
 expr6 =
 {expr_par} par_o expr par_f |
 {expr_nb} nombre |
-{expr_var} var |
-{expr_appel} app;
-
-
-app =
-{app_lde} id par_o lde par_f pvir;
-
-lde =
-{lde_list} expr lde |
-{lde_vide} ;
-
-
-
-iret =
-{inst_ret}  ret expr pvir;
-
-itq =
-{inst_tq} tq expr fai ibloc;
-
-sinon =
-{inst_sinon} sin ibloc |
-{sinon_vide} ;
-
-isi =
-{inst_si} si expr al ibloc sinon;
-
-inst_bloc =
-{iapp} iapp |
-{iaff} iaff |
-{isi} isi |
-{itq} itq |
-{iret} iret;
-
-iapp =
-{app} app;
-
-iaff =
-{aff} var egal expr pvir;
-
-inst =
-{iapp} iapp |
-{iaff} iaff |
-{isi} isi |
-{itq} itq |
-{ibloc} ibloc |
-{iret} iret;
-
-
-lire =
-{lire} lir par_o par_f pvir;
+{expr_var} var;
+//{expr_appel} app;
 
 ecrire =
-{ecr_expr} ecr par_o expr par_f pvir |
-{ecr_var}  ecr par_o var par_f pvir;
+{ecr_expr} ecr par_o expr par_f pvir ;
+
