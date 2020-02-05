@@ -9,12 +9,12 @@ public final class TTq extends Token
 {
     public TTq()
     {
-        super.setText("tant_que");
+        super.setText("tantque");
     }
 
     public TTq(int line, int pos)
     {
-        super.setText("tant_que");
+        super.setText("tantque");
         setLine(line);
         setPos(pos);
     }

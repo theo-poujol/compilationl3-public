@@ -27,7 +27,7 @@ par_f = ')';
 sin = 'sinon';
 si = 'si';
 al = 'alors';
-tq = 'tant_que';
+tq = 'tantque';
 fai = 'faire';
 ret = 'retour';
 fct = 'fonction';
@@ -83,8 +83,8 @@ inst_bloc =
 {isi} isi |
 {itq} itq |
 {iret} iret |
-{ecriture} ecrire;
-//{lire} lir par_o par_f pvir;
+{ecriture} ecrire |
+{lire} lire;
 
 
 iapp =
@@ -95,7 +95,8 @@ app =
 {app_lde} id par_o lde par_f;
 
 iaff =
-{aff} var egal expr pvir;
+{aff} var egal expr pvir |
+{aff_lire} var egal lire;
 
 isi =
 {inst_si} si expr al ibloc sinon;
@@ -165,9 +166,12 @@ expr6 =
 {expr_par} par_o expr par_f |
 {expr_nb} nombre |
 {expr_var} var;
-//{expr_appel} app;
-
+//{expr_ecr} ecrire |
+//{expr_lire} lire;
 
 ecrire =
 {ecr_appel} ecr par_o app  par_f pvir |
 {ecr_expr} ecr par_o expr par_f pvir ;
+
+lire =
+{lire} lir par_o par_f pvir;

@@ -189,6 +189,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseALireInstBloc(ALireInstBloc node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAAppIapp(AAppIapp node)
     {
         defaultCase(node);
@@ -202,6 +208,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAAffIaff(AAffIaff node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAffLireIaff(AAffLireIaff node)
     {
         defaultCase(node);
     }
@@ -418,6 +430,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAEcrExprEcrire(AEcrExprEcrire node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALireLire(ALireLire node)
     {
         defaultCase(node);
     }

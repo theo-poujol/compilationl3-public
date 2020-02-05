@@ -31,9 +31,11 @@ public interface Analysis extends Switch
     void caseAItqInstBloc(AItqInstBloc node);
     void caseAIretInstBloc(AIretInstBloc node);
     void caseAEcritureInstBloc(AEcritureInstBloc node);
+    void caseALireInstBloc(ALireInstBloc node);
     void caseAAppIapp(AAppIapp node);
     void caseAAppLdeApp(AAppLdeApp node);
     void caseAAffIaff(AAffIaff node);
+    void caseAAffLireIaff(AAffLireIaff node);
     void caseAInstSiIsi(AInstSiIsi node);
     void caseAInstSinonSinon(AInstSinonSinon node);
     void caseASinonVideSinon(ASinonVideSinon node);
@@ -70,6 +72,7 @@ public interface Analysis extends Switch
     void caseAExprVarExpr6(AExprVarExpr6 node);
     void caseAEcrAppelEcrire(AEcrAppelEcrire node);
     void caseAEcrExprEcrire(AEcrExprEcrire node);
+    void caseALireLire(ALireLire node);
 
     void caseTPlus(TPlus node);
     void caseTEgal(TEgal node);

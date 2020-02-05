@@ -471,6 +471,27 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAEcritureInstBloc(node);
     }
 
+    public void inALireInstBloc(ALireInstBloc node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALireInstBloc(ALireInstBloc node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALireInstBloc(ALireInstBloc node)
+    {
+        inALireInstBloc(node);
+        if(node.getLire() != null)
+        {
+            node.getLire().apply(this);
+        }
+        outALireInstBloc(node);
+    }
+
     public void inAAppIapp(AAppIapp node)
     {
         defaultIn(node);
@@ -560,6 +581,35 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getVar().apply(this);
         }
         outAAffIaff(node);
+    }
+
+    public void inAAffLireIaff(AAffLireIaff node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAffLireIaff(AAffLireIaff node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAffLireIaff(AAffLireIaff node)
+    {
+        inAAffLireIaff(node);
+        if(node.getLire() != null)
+        {
+            node.getLire().apply(this);
+        }
+        if(node.getEgal() != null)
+        {
+            node.getEgal().apply(this);
+        }
+        if(node.getVar() != null)
+        {
+            node.getVar().apply(this);
+        }
+        outAAffLireIaff(node);
     }
 
     public void inAInstSiIsi(AInstSiIsi node)
@@ -1496,5 +1546,38 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getEcr().apply(this);
         }
         outAEcrExprEcrire(node);
+    }
+
+    public void inALireLire(ALireLire node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALireLire(ALireLire node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALireLire(ALireLire node)
+    {
+        inALireLire(node);
+        if(node.getPvir() != null)
+        {
+            node.getPvir().apply(this);
+        }
+        if(node.getParF() != null)
+        {
+            node.getParF().apply(this);
+        }
+        if(node.getParO() != null)
+        {
+            node.getParO().apply(this);
+        }
+        if(node.getLir() != null)
+        {
+            node.getLir().apply(this);
+        }
+        outALireLire(node);
     }
 }
