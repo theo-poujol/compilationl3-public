@@ -237,6 +237,18 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAParamParams(AParamParams node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParamVideParams(AParamVideParams node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAVSimpleVar(AVSimpleVar node)
     {
         defaultCase(node);
@@ -261,7 +273,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseALdeAltLdeAlt(ALdeAltLdeAlt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALdeAltVideLdeAlt(ALdeAltVideLdeAlt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseALdeListLde(ALdeListLde node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALdeListVirLde(ALdeListVirLde node)
     {
         defaultCase(node);
     }
@@ -376,6 +406,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAExprVarExpr6(AExprVarExpr6 node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAEcrAppelEcrire(AEcrAppelEcrire node)
     {
         defaultCase(node);
     }

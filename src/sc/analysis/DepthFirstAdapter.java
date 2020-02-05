@@ -703,6 +703,48 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAInstRetIret(node);
     }
 
+    public void inAParamParams(AParamParams node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAParamParams(AParamParams node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAParamParams(AParamParams node)
+    {
+        inAParamParams(node);
+        if(node.getExpr() != null)
+        {
+            node.getExpr().apply(this);
+        }
+        if(node.getLdeAlt() != null)
+        {
+            node.getLdeAlt().apply(this);
+        }
+        outAParamParams(node);
+    }
+
+    public void inAParamVideParams(AParamVideParams node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAParamVideParams(AParamVideParams node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAParamVideParams(AParamVideParams node)
+    {
+        inAParamVideParams(node);
+        outAParamVideParams(node);
+    }
+
     public void inAVSimpleVar(AVSimpleVar node)
     {
         defaultIn(node);
@@ -819,6 +861,48 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outADvDeriveDvar(node);
     }
 
+    public void inALdeAltLdeAlt(ALdeAltLdeAlt node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALdeAltLdeAlt(ALdeAltLdeAlt node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALdeAltLdeAlt(ALdeAltLdeAlt node)
+    {
+        inALdeAltLdeAlt(node);
+        if(node.getVir() != null)
+        {
+            node.getVir().apply(this);
+        }
+        if(node.getLde() != null)
+        {
+            node.getLde().apply(this);
+        }
+        outALdeAltLdeAlt(node);
+    }
+
+    public void inALdeAltVideLdeAlt(ALdeAltVideLdeAlt node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALdeAltVideLdeAlt(ALdeAltVideLdeAlt node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALdeAltVideLdeAlt(ALdeAltVideLdeAlt node)
+    {
+        inALdeAltVideLdeAlt(node);
+        outALdeAltVideLdeAlt(node);
+    }
+
     public void inALdeListLde(ALdeListLde node)
     {
         defaultIn(node);
@@ -842,6 +926,31 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getLde().apply(this);
         }
         outALdeListLde(node);
+    }
+
+    public void inALdeListVirLde(ALdeListVirLde node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALdeListVirLde(ALdeListVirLde node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALdeListVirLde(ALdeListVirLde node)
+    {
+        inALdeListVirLde(node);
+        if(node.getVir() != null)
+        {
+            node.getVir().apply(this);
+        }
+        if(node.getLde() != null)
+        {
+            node.getLde().apply(this);
+        }
+        outALdeListVirLde(node);
     }
 
     public void inALdeVideLde(ALdeVideLde node)
@@ -1313,6 +1422,43 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getVar().apply(this);
         }
         outAExprVarExpr6(node);
+    }
+
+    public void inAEcrAppelEcrire(AEcrAppelEcrire node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEcrAppelEcrire(AEcrAppelEcrire node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEcrAppelEcrire(AEcrAppelEcrire node)
+    {
+        inAEcrAppelEcrire(node);
+        if(node.getEcr() != null)
+        {
+            node.getEcr().apply(this);
+        }
+        if(node.getParO() != null)
+        {
+            node.getParO().apply(this);
+        }
+        if(node.getApp() != null)
+        {
+            node.getApp().apply(this);
+        }
+        if(node.getParF() != null)
+        {
+            node.getParF().apply(this);
+        }
+        if(node.getPvir() != null)
+        {
+            node.getPvir().apply(this);
+        }
+        outAEcrAppelEcrire(node);
     }
 
     public void inAEcrExprEcrire(AEcrExprEcrire node)

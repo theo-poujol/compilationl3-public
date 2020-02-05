@@ -62,17 +62,6 @@ ldv_alt =
 {liste_var} vir dvar ldv_alt |
 {liste_vide_var} ;
 
-
-
-
-
-
-
-
-
-
-
-
 ldf =
 {ldf_dv} df ldf |
 {ldf_vide} ;
@@ -122,16 +111,9 @@ iret =
 {inst_ret}  ret expr pvir;
 
 
-
-
-
-
-
-
-
-
-
-
+params =
+{param} expr lde_alt |
+{param_vide} ;
 
 var =
 {v_simple} id |
@@ -142,8 +124,13 @@ dvar =
 {dv_derive} ent  id croch_o nombre croch_f;
 
 
+lde_alt =
+{lde_alt} vir lde |
+{lde_alt_vide} ;
+
 lde =
 {lde_list} expr lde |
+{lde_list_vir} vir lde |
 {lde_vide} ;
 
 expr =
@@ -173,12 +160,14 @@ expr5 =
 {expr_non} non expr5 |
 {expr6} expr6;
 
+
 expr6 =
 {expr_par} par_o expr par_f |
 {expr_nb} nombre |
 {expr_var} var;
 //{expr_appel} app;
 
-ecrire =
-{ecr_expr} ecr par_o expr par_f pvir ;
 
+ecrire =
+{ecr_appel} ecr par_o app  par_f pvir |
+{ecr_expr} ecr par_o expr par_f pvir ;
