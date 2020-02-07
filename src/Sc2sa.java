@@ -6,11 +6,6 @@ public class Sc2sa extends DepthFirstAdapter {
     private SaNode returnValue;
 
     @Override
-    public void caseStart(Start node) {
-        super.caseStart(node);
-    }
-
-    @Override
     public void caseAProgramme(AProgramme node) {
         SaLDec decVar = null;
         SaLDec decFonc = null;
@@ -54,17 +49,39 @@ public class Sc2sa extends DepthFirstAdapter {
 
     @Override
     public void caseAListVarMainVideLdv(AListVarMainVideLdv node) {
+        SaDecVar decVar = null;
+        SaLDec lDec = null;
+        node.apply(this);
+        decVar = (SaDecVar) this.returnValue;
+        node.apply(this);
+        lDec = (SaLDec) this.returnValue;
 
+        this.returnValue = new SaLDec(decVar, lDec);
     }
 
     @Override
     public void caseAListeVarLdvAlt(AListeVarLdvAlt node) {
-        super.caseAListeVarLdvAlt(node);
+        SaDecVar decVar = null;
+        SaLDec lDec = null;
+        node.getDvar().apply(this);
+        decVar = (SaDecVar) this.returnValue;
+        node.getLdvAlt().apply(this);
+        lDec = (SaLDec) this.returnValue;
+
+
+        this.returnValue = new SaLDec(decVar, lDec);
     }
 
     @Override
     public void caseAListeVideVarLdvAlt(AListeVideVarLdvAlt node) {
-        super.caseAListeVideVarLdvAlt(node);
+        SaDecVar decVar = null;
+        SaLDec lDec = null;
+        node.apply(this);
+        decVar = (SaDecVar) this.returnValue;
+        node.apply(this);
+        lDec = (SaLDec) this.returnValue;
+
+        this.returnValue = new SaLDec(decVar, lDec);
     }
 
     @Override
@@ -87,7 +104,11 @@ public class Sc2sa extends DepthFirstAdapter {
 
     @Override
     public void caseADefFctDf(ADefFctDf node) {
-        super.caseADefFctDf(node);
+        AI
+        /*SaDecFonc decFonc = null;
+        TId nom = null;
+        node.getId().apply(this);
+        nom = (TId) this.returnValue;*/
     }
 
     @Override
