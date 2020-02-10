@@ -104,31 +104,57 @@ public class Sc2sa extends DepthFirstAdapter {
 
     @Override
     public void caseADefFctDf(ADefFctDf node) {
-        AI
-        /*SaDecFonc decFonc = null;
-        TId nom = null;
-        node.getId().apply(this);
-        nom = (TId) this.returnValue;*/
+        SaLDec ldv;
+        SaLDec ldvo;
+        SaInstBloc ibloc;
+        node.getLdv().apply(this);
+        ldv = (SaLDec) this.returnValue;
+        node.getLdvo().apply(this);
+        ldvo = (SaLDec) this.returnValue;
+        node.getIbloc().apply(this);
+        ibloc = (SaInstBloc)this.returnValue;
+
+        this.returnValue = new SaDecFonc(node.getId().getText(),ldv,ldvo,ibloc);
+
     }
 
     @Override
     public void caseALdiIbloc(ALdiIbloc node) {
-        super.caseALdiIbloc(node);
+        SaLInst ldi;
+        node.getLdi().apply(this);
+        ldi = (SaLInst) this.returnValue;
+        this.returnValue = new SaInstBloc(ldi);
     }
 
     @Override
     public void caseALdiListLdi(ALdiListLdi node) {
-        super.caseALdiListLdi(node);
+        SaInstBloc instBloc;
+        SaLInst ldi;
+        node.getInstBloc().apply(this);
+        instBloc = (SaInstBloc) this.returnValue;
+        node.getLdi().apply(this);
+        ldi = (SaLInst) this.returnValue;
+        this.returnValue = new SaLInst(instBloc,ldi);
+
     }
 
     @Override
     public void caseALdiVideLdi(ALdiVideLdi node) {
-        super.caseALdiVideLdi(node);
+
+        SaInstBloc instBloc = null;
+        SaLInst ldi = null;
+        node.apply(this);
+        instBloc = (SaInstBloc) this.returnValue;
+        node.apply(this);
+        ldi = (SaLInst) this.returnValue;
+        this.returnValue = new SaLInst(instBloc,ldi);
+
     }
 
     @Override
     public void caseAIappInstBloc(AIappInstBloc node) {
-        super.caseAIappInstBloc(node);
+
+
     }
 
     @Override
