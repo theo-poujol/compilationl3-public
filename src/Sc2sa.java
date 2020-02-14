@@ -153,28 +153,46 @@ public class Sc2sa extends DepthFirstAdapter {
 
     @Override
     public void caseAIappInstBloc(AIappInstBloc node) {
-
-
+        SaAppel app = null;
+        node.getIapp().apply(this);
+        app = (SaAppel) this.returnValue;
+        this.returnValue = new SaAppel(app.getNom(),app.getArguments());
+        this.returnValue = app;
     }
 
     @Override
     public void caseAIaffInstBloc(AIaffInstBloc node) {
-        super.caseAIaffInstBloc(node);
+        SaInstAffect aff = null;
+        node.getIaff().apply(this);
+        aff = (SaInstAffect) this.returnValue;
+        this.returnValue = aff;
+
     }
 
     @Override
     public void caseAIsiInstBloc(AIsiInstBloc node) {
-        super.caseAIsiInstBloc(node);
+        SaInstSi si = null;
+        node.getIsi().apply(this);
+        si = (SaInstSi) this.returnValue;
+        this.returnValue = si;
     }
 
     @Override
     public void caseAItqInstBloc(AItqInstBloc node) {
-        super.caseAItqInstBloc(node);
+
+        SaInstTantQue tq = null;
+        node.getItq().apply(this);
+        tq = (SaInstTantQue) this.returnValue;
+        this.returnValue = tq;
     }
 
     @Override
     public void caseAIretInstBloc(AIretInstBloc node) {
-        super.caseAIretInstBloc(node);
+        SaInstRetour ret = null;
+        node.getIret().apply(this);
+        ret = (SaInstRetour) this.returnValue;
+        this.returnValue = ret;
+
     }
 
     @Override
@@ -189,17 +207,33 @@ public class Sc2sa extends DepthFirstAdapter {
 
     @Override
     public void caseAAppIapp(AAppIapp node) {
-        super.caseAAppIapp(node);
+
+        SaAppel app = null;
+        node.getApp().apply(this);
+        app = (SaAppel) this.returnValue;
+        this.returnValue = app;
     }
 
     @Override
     public void caseAAppLdeApp(AAppLdeApp node) {
-        super.caseAAppLdeApp(node);
+
+        SaLExp lde = null;
+        node.getLde().apply(this);
+        lde = (SaLExp) this.returnValue;
+        this.returnValue = new SaAppel(node.getId().getText(),lde);
+
     }
 
     @Override
     public void caseAAffIaff(AAffIaff node) {
-        super.caseAAffIaff(node);
+
+        SaVar var =null;
+        SaExp exp = null;
+        node.getVar().apply(this);
+        var = (SaVar) this.returnValue;
+        node.getExpr().apply(this);
+        exp = (SaExp) this.returnValue;
+        this.returnValue = new SaInstAffect(var,exp);
     }
 
     @Override
@@ -209,12 +243,20 @@ public class Sc2sa extends DepthFirstAdapter {
 
     @Override
     public void caseAInstSiIsi(AInstSiIsi node) {
-        super.caseAInstSiIsi(node);
+
+        SaExp exp = null;
+        node.getExpr().apply(this);
+        SaLInst alors = null;
+        node.ge
+
+
+
     }
 
     @Override
     public void caseAInstSinonSinon(AInstSinonSinon node) {
-        super.caseAInstSinonSinon(node);
+
+
     }
 
     @Override
