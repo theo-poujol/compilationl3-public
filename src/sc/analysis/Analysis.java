@@ -22,9 +22,6 @@ public interface Analysis extends Switch
     void caseALdfDvLdf(ALdfDvLdf node);
     void caseALdfVideLdf(ALdfVideLdf node);
     void caseADefFctDf(ADefFctDf node);
-    void caseALdiIbloc(ALdiIbloc node);
-    void caseALdiListLdi(ALdiListLdi node);
-    void caseALdiVideLdi(ALdiVideLdi node);
     void caseAIappInstBloc(AIappInstBloc node);
     void caseAIaffInstBloc(AIaffInstBloc node);
     void caseAIsiInstBloc(AIsiInstBloc node);
@@ -32,6 +29,9 @@ public interface Analysis extends Switch
     void caseAIretInstBloc(AIretInstBloc node);
     void caseAEcritureInstBloc(AEcritureInstBloc node);
     void caseALireInstBloc(ALireInstBloc node);
+    void caseALdiIbloc(ALdiIbloc node);
+    void caseALdiListLdi(ALdiListLdi node);
+    void caseALdiVideLdi(ALdiVideLdi node);
     void caseAAppIapp(AAppIapp node);
     void caseAAppLdeApp(AAppLdeApp node);
     void caseAAffIaff(AAffIaff node);
@@ -41,14 +41,10 @@ public interface Analysis extends Switch
     void caseASinonVideSinon(ASinonVideSinon node);
     void caseAInstTqItq(AInstTqItq node);
     void caseAInstRetIret(AInstRetIret node);
-    void caseAParamParams(AParamParams node);
-    void caseAParamVideParams(AParamVideParams node);
     void caseAVSimpleVar(AVSimpleVar node);
     void caseAVDerivVar(AVDerivVar node);
     void caseADvSimpleDvar(ADvSimpleDvar node);
     void caseADvDeriveDvar(ADvDeriveDvar node);
-    void caseALdeAltLdeAlt(ALdeAltLdeAlt node);
-    void caseALdeAltVideLdeAlt(ALdeAltVideLdeAlt node);
     void caseALdeListLde(ALdeListLde node);
     void caseALdeListVirLde(ALdeListVirLde node);
     void caseALdeVideLde(ALdeVideLde node);

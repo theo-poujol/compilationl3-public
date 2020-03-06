@@ -10,7 +10,7 @@ public class Sa2Xml extends SaDepthFirstVisitor < Void > {
     public Sa2Xml(SaNode root, String baseFileName)
     {
 	if (baseFileName == null){
-	    this.out = System.out;	    
+	    this.out = System.out;
 	}
 	else{
 	    try {

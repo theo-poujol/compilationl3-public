@@ -135,24 +135,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseALdiIbloc(ALdiIbloc node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseALdiListLdi(ALdiListLdi node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseALdiVideLdi(ALdiVideLdi node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseAIappInstBloc(AIappInstBloc node)
     {
         defaultCase(node);
@@ -190,6 +172,24 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseALireInstBloc(ALireInstBloc node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALdiIbloc(ALdiIbloc node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALdiListLdi(ALdiListLdi node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseALdiVideLdi(ALdiVideLdi node)
     {
         defaultCase(node);
     }
@@ -249,18 +249,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAParamParams(AParamParams node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAParamVideParams(AParamVideParams node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseAVSimpleVar(AVSimpleVar node)
     {
         defaultCase(node);
@@ -280,18 +268,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseADvDeriveDvar(ADvDeriveDvar node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseALdeAltLdeAlt(ALdeAltLdeAlt node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseALdeAltVideLdeAlt(ALdeAltVideLdeAlt node)
     {
         defaultCase(node);
     }
