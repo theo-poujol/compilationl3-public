@@ -16,7 +16,6 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
     }
 
-
     @Override
     public Void visit(SaDecTab node) {
 
@@ -33,8 +32,8 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
         {
             tableLocale.addVar(var.identif,var.taille);
         }
-
-        for (TsItemParam param : tableGlobale)
+//
+//        for (TsItemParam param : tableGlobale)
 
 
         return null;
@@ -65,8 +64,14 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
     @Override
     public Void visit(SaVarIndicee node) {
 
-        if (this.tableGlobale.getVar()node.getNom()) == null)
-            System.out.println("La variable "+ node.getNom()+"n'existe pas");
+//        if (this.tableGlobale.getVar()node.getNom()) == null)
+//            System.out.println("La variable "+ node.getNom()+"n'existe pas");
         return null;
     }
+
+
+    public Ts getTableGlobale() {
+        return tableGlobale;
+    }
+
 }
