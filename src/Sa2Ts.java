@@ -1,7 +1,5 @@
 import sa.*;
 import ts.Ts;
-import ts.TsItem;
-import ts.TsItemParam;
 import ts.TsItemVar;
 
 public class Sa2Ts extends SaDepthFirstVisitor<Void> {
@@ -24,7 +22,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
         if (this.tableGlobale.getVar(node.getNom()) == null) {
             System.out.println("La variable "+ node.getNom()+"n'existe pas 1");
-//            node.tsItem = this.tableGlobale.addVar(node.getNom(), node.getTaille());
+          node.tsItem = this.tableGlobale.addVar(node.getNom(), 10);
         }
 
 
@@ -59,7 +57,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
     @Override
     public Void visit(SaDecVar node) {
         if (this.tableGlobale.getVar(node.getNom()) == null)
-//            this.tableGlobale.addVar(node.getNom(),node.tsItem.getTaille());
+            this.tableGlobale.addVar(node.getNom(),node.tsItem.getTaille());
 
         return null;
     }
