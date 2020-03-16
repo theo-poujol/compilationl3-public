@@ -7,35 +7,52 @@ import ts.TsItemVar;
 public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
     Ts tableGlobale;
+    Ts tableLocale;
 
 
     Sa2Ts(SaNode node)
     {
+        tableLocale = null;
         tableGlobale = new Ts();
-        node.accept(this);
+        if (node != null)
+            node.accept(this);
 
     }
 
     @Override
     public Void visit(SaDecTab node) {
 
-        if (this.tableGlobale.getVar(node.getNom()) == null)
-            System.out.println("La variable "+ node.getNom()+"n'existe pas");
+        if (this.tableGlobale.getVar(node.getNom()) == null) {
+            System.out.println("La variable "+ node.getNom()+"n'existe pas 1");
+//            node.tsItem = this.tableGlobale.addVar(node.getNom(), node.getTaille());
+        }
+
+
+
         return null;
     }
 
     @Override
     public Void visit(SaDecFonc node) {
-        Ts tableLocale = new Ts();
+        this.tableLocale = new Ts();
 
-        for (TsItemVar var : tableGlobale.variables.values())
-        {
-            tableLocale.addVar(var.identif,var.taille);
+        int nbArgs = 0;
+
+        if (!(tableGlobale.getFct(node.getNom()) == null)) {
+            System.out.println("Fonction déjà existante");
         }
-//
-//        for (TsItemParam param : tableGlobale)
+        else
+        {
+            if (node.getVariable() != null)  node.getVariable().accept(this);
+            if (node.getParametres() != null) {
+                nbArgs = node.getParametres().length();
+                node.getParametres().accept(this);
+            }
+            if (node.getCorps() != null) node.getCorps().accept(this);
+        }
 
-
+        node.tsItem  = tableGlobale.addFct(node.getNom(), nbArgs,tableLocale,node);
+        this.tableLocale = null;
         return null;
     }
 
@@ -49,23 +66,26 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
     @Override
     public Void visit(SaVarSimple node) {
-            if (this.tableGlobale.getVar(node.getNom()) == null)
-                System.out.println("La variable "+ node.getNom()+"n'existe pas");
+        if (this.tableGlobale.getVar(node.getNom()) == null)
+            System.out.println("La variable "+ node.getNom()+"n'existe pas 2");
         return null;
     }
 
     @Override
     public Void visit(SaAppel node) {
         if (this.tableGlobale.getFct(node.getNom()) == null)
-            System.out.println("La fonction n'existe pas "+ node.getNom()+"n'existe pas");
+            System.out.println("La fonction n'existe pas "+ node.getNom()+"n'existe pas 3");
         return null;
     }
 
     @Override
     public Void visit(SaVarIndicee node) {
 
-//        if (this.tableGlobale.getVar()node.getNom()) == null)
-//            System.out.println("La variable "+ node.getNom()+"n'existe pas");
+        if (this.tableGlobale.getVar(node.getNom()) == null) {
+            System.out.println("La variable "+ node.getNom()+"n'existe pas 4");
+            this.tableGlobale.addVar(node.getNom(),10);
+        }
+
         return null;
     }
 
