@@ -7,12 +7,12 @@ public class TsItemFct {//extends TsItem {
     public int nbArgs;
     private Ts table;
     public SaDecFonc saDecFonc;
-
+	
     public TsItemFct(String identif, int nbArgs, Ts table, SaDecFonc saDecFonc){
-        this.identif = identif;
-        this.nbArgs = nbArgs;
-        this.table = table;
-        this.saDecFonc = saDecFonc;
+	this.identif = identif;
+	this.nbArgs = nbArgs;
+	this.table = table;
+	this.saDecFonc = saDecFonc;
     }
 
     public int getNbArgs(){return this.nbArgs;}
@@ -20,7 +20,8 @@ public class TsItemFct {//extends TsItem {
     public Ts getTable(){return this.table;}
     public String getIdentif(){return this.identif;}
     public String toString(){
-        return this.identif +  "\tFCT\t" + this.nbArgs;
+    	return this.identif +  "\tFCT\t" + this.nbArgs;
     }
 
 }
+

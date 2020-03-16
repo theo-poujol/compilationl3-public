@@ -59,7 +59,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
     @Override
     public Void visit(SaDecVar node) {
         if (this.tableGlobale.getVar(node.getNom()) == null)
-            this.tableGlobale.addVar(node.getNom(),node.tsItem.getTaille());
+//            this.tableGlobale.addVar(node.getNom(),node.tsItem.getTaille());
 
         return null;
     }
