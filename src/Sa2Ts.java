@@ -21,9 +21,22 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
     @Override
     public Void visit(SaDecTab node) {
         System.out.println("DEC TAB");
-        if (this.tableGlobale.getVar(node.getNom()) == null) {
-          node.tsItem = this.tableGlobale.addVar(node.getNom(), 10);
+
+        if (this.tableLocale == null) {
+            if (this.tableGlobale.getVar(node.getNom()) == null)
+                node.tsItem = this.tableGlobale.addVar(node.getNom(), 10);
         }
+
+
+        else {
+            if (this.tableLocale.getVar(node.getNom()) != null) {
+                if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
+                    if (this.tableGlobale.getVar(node.getNom()) == null)
+                        node.tsItem = this.tableGlobale.addVar(node.getNom(), 10);
+                }
+            }
+        }
+
 
 
 
@@ -74,21 +87,52 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
     @Override
     public Void visit(SaDecVar node) {
         System.out.println("DEC VAR 1");
-        if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
-            System.out.println("DEC VAR 2");
-            node.tsItem = this.tableGlobale.addVar(node.getNom(),1);
+//        if (this.tableLocale != null) {
+//            if (this.tableLocale.getVar(node.getNom()) != null) {
+//                if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
+//                    if (this.tableGlobale.getVar(node.getNom()) == null)
+//                        node.tsItem = this.tableGlobale.addVar(node.getNom(),1);
+//                }
+//            }
+//        }
+
+
+        if (this.tableLocale == null) {
+            if (this.tableGlobale.getVar(node.getNom()) == null)
+                node.tsItem = this.tableGlobale.addVar(node.getNom(), 1);
         }
+
+
+        else {
+            if (this.tableLocale.getVar(node.getNom()) != null) {
+                if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
+                    if (this.tableGlobale.getVar(node.getNom()) == null)
+                        node.tsItem = this.tableGlobale.addVar(node.getNom(), 1);
+                }
+            }
+        }
+
         return null;
     }
 
     @Override
     public Void visit(SaVarSimple node) {
-        System.out.println("VAR SIMPLE 1");
-        if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
-            System.out.println("VAR SIMPLE 2");
-            node.tsItem = this.tableGlobale.addVar(node.getNom(),1);
+//        System.out.println("VAR SIMPLE 1");
+//        if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
+//            System.out.println("VAR SIMPLE 2");
+//            node.tsItem = this.tableGlobale.addVar(node.getNom(),1);
+//        }
+//        node.tsItem = this.tableGlobale.addVar(node.getNom(),1);
+
+
+
+        if (this.tableLocale != null) {
+            if (this.tableLocale.getVar(node.getNom()) != null)
+                node.tsItem = this.tableLocale.getVar(node.getNom());
         }
 
+        if (this.tableGlobale.getVar(node.getNom()) != null)
+            node.tsItem = this.tableGlobale.getVar(node.getNom());
         return null;
     }
 
@@ -108,12 +152,25 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
     @Override
     public Void visit(SaVarIndicee node) {
 
-        System.out.println("VAR INDICEE");
-        if (this.tableGlobale.getVar(node.getNom()) == null) {
-            node.tsItem = this.tableGlobale.addVar(node.getNom(),10);
-            node.getIndice().accept(this);
+//        System.out.println("VAR INDICEE");
+//        if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
+//            node.tsItem = this.tableGlobale.addVar(node.getNom(),10);
+//            node.getIndice().accept(this);
+//        }
+
+//        node.tsItem = this.tableGlobale.addVar(node.getNom(),10);
+//        node.getIndice().accept(this);
+
+        if (this.tableLocale != null) {
+            if (this.tableLocale.getVar(node.getNom()) != null)
+                node.tsItem = this.tableLocale.getVar(node.getNom());
         }
 
+        if (this.tableGlobale.getVar(node.getNom()) != null)
+            node.tsItem = this.tableGlobale.getVar(node.getNom());
+
+        if (node.getIndice() != null)
+            node.getIndice().accept(this);
         return null;
     }
 
