@@ -20,9 +20,8 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
     @Override
     public Void visit(SaDecTab node) {
-
+        System.out.println("DEC TAB");
         if (this.tableGlobale.getVar(node.getNom()) == null) {
-            System.out.println("La variable "+ node.getNom()+"n'existe pas 1");
           node.tsItem = this.tableGlobale.addVar(node.getNom(), 10);
         }
 
@@ -33,29 +32,34 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
     @Override
     public Void visit(SaDecFonc node) {
-        this.tableLocale = new Ts();
 
+        System.out.println("FONCTION");
+        this.tableLocale = new Ts();
         int nbArgs = 0;
 
-        if (!(tableGlobale.getFct(node.getNom()) == null)) {
-            System.out.println("Fonction déjà existante");
-        }
-        else
+        if (tableGlobale.getFct(node.getNom()) == null)
         {
-            if (node.getVariable() != null)  node.getVariable().accept(this);
+
             if (node.getParametres() != null) {
+
                 nbArgs = node.getParametres().length();
-                this.tableGlobale.addParam(node.getParametres().getTete().getNom());
+                this.tableLocale.addParam(node.getParametres().getTete().getNom());
+
                 if (node.getParametres().getQueue() != null) {
                     addRecursivesParams(node.getParametres().getQueue());
                 }
 
                 node.getParametres().accept(this);
             }
+
+            if (node.getVariable() != null)  node.getVariable().accept(this);
             if (node.getCorps() != null) node.getCorps().accept(this);
+
+            node.tsItem  = tableGlobale.addFct(node.getNom(), nbArgs,tableLocale,node);
+
         }
 
-        node.tsItem  = tableGlobale.addFct(node.getNom(), nbArgs,tableLocale,node);
+
         this.tableLocale = null;
         return null;
     }
@@ -63,15 +67,15 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
 
     public void addRecursivesParams(SaLDec lDec) {
-        this.tableGlobale.addParam(lDec.getTete().getNom());
+        this.tableLocale.addParam(lDec.getTete().getNom());
         if (lDec.getQueue() != null) addRecursivesParams(lDec.getQueue());
     }
 
     @Override
     public Void visit(SaDecVar node) {
+        System.out.println("DEC VAR");
+        System.out.println("ICI -> " + node.tsItem.isParam);
         if (this.tableGlobale.getVar(node.getNom()) == null) {
-//            System.out.println("nom -> : " + node.getNom() + " -");
-//            System.out.println("La variable "+ node.getNom()+"n'existe pas 2");
             node.tsItem = this.tableGlobale.addVar(node.getNom(),1);
 
         }
@@ -82,9 +86,9 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
     @Override
     public Void visit(SaVarSimple node) {
+        System.out.println("VAR SIMPLE");
         if (this.tableGlobale.getVar(node.getNom()) == null) {
             node.tsItem = this.tableGlobale.addVar(node.getNom(),1);
-            System.out.println("La variable "+ node.getNom()+"n'existe pas 3");
         }
 
         return null;
@@ -93,6 +97,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
     @Override
     public Void visit(SaAppel node) {
 
+        System.out.println("APPEL");
         if (this.tableGlobale.getFct(node.getNom()) != null) {
             node.tsItem = this.tableGlobale.getFct(node.getNom());
             if (node.tsItem.nbArgs != 0) {
@@ -105,8 +110,8 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
     @Override
     public Void visit(SaVarIndicee node) {
 
+        System.out.println("VAR INDICEE");
         if (this.tableGlobale.getVar(node.getNom()) == null) {
-            System.out.println("La variable "+ node.getNom()+" n'existe pas 5");
             node.tsItem = this.tableGlobale.addVar(node.getNom(),10);
             node.getIndice().accept(this);
         }
