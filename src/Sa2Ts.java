@@ -73,21 +73,19 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
     @Override
     public Void visit(SaDecVar node) {
-        System.out.println("DEC VAR");
-        System.out.println("ICI -> " + node.tsItem.isParam);
-        if (this.tableGlobale.getVar(node.getNom()) == null) {
+        System.out.println("DEC VAR 1");
+        if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
+            System.out.println("DEC VAR 2");
             node.tsItem = this.tableGlobale.addVar(node.getNom(),1);
-
         }
-
-
         return null;
     }
 
     @Override
     public Void visit(SaVarSimple node) {
-        System.out.println("VAR SIMPLE");
-        if (this.tableGlobale.getVar(node.getNom()) == null) {
+        System.out.println("VAR SIMPLE 1");
+        if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
+            System.out.println("VAR SIMPLE 2");
             node.tsItem = this.tableGlobale.addVar(node.getNom(),1);
         }
 
