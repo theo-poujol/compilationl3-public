@@ -1,4 +1,5 @@
 #! /usr/bin/python3
+#! /usr/bin/python3
 
 import sys
 import os
@@ -231,7 +232,7 @@ if __name__ == "__main__" :
 
   saEvaluation = evaluateSa(inputFiles)
   tsEvaluation = evaluateDiff(inputFiles, ".ts", "ts-ref/", "Table des Symboles")
-  c3aEvaluation = evaluateDiff(inputFiles, ".c3aout", "c3aout-ref/", "Code 3 Adresses")
+  c3aEvaluation = evaluateDiff(inputFiles, ".c3a", "c3a-ref/", "Code 3 Adresses")
   nasmEvaluation = evaluateNasm(inputFiles)
 
   useColor = True

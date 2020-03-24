@@ -20,7 +20,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
     @Override
     public Void visit(SaDecTab node) {
-        System.out.println("DEC TAB");
+
 
         if (this.tableLocale == null) {
             if (this.tableGlobale.getVar(node.getNom()) == null)
@@ -46,7 +46,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
     @Override
     public Void visit(SaDecFonc node) {
 
-        System.out.println("FONCTION");
+
         this.tableLocale = new Ts();
         int nbArgs = 0;
 
@@ -86,7 +86,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
     @Override
     public Void visit(SaDecVar node) {
-        System.out.println("DEC VAR 1");
+
 //        if (this.tableLocale != null) {
 //            if (this.tableLocale.getVar(node.getNom()) != null) {
 //                if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
@@ -139,7 +139,8 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
     @Override
     public Void visit(SaAppel node) {
 
-        System.out.println("APPEL");
+
+
         if (this.tableGlobale.getFct(node.getNom()) != null) {
             node.tsItem = this.tableGlobale.getFct(node.getNom());
             if (node.tsItem.nbArgs != 0) {
