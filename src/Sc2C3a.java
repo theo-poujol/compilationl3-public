@@ -23,8 +23,8 @@ public class Sc2C3a extends SaDepthFirstVisitor<C3aOperand> {
     public C3aOperand visit(SaProg node) {
 
         C3aFunction function = (C3aFunction) visit(node.getFonctions());
-        if (function.getValue() == null) return null;
-        C3aInstFBegin c3aInstFBegin = new C3aInstFBegin(function.getValue(),"entree " + "fonction");
+        if (function == null) System.out.println("fonction null");
+        C3aInstFBegin c3aInstFBegin = new C3aInstFBegin(function.val,"entree " + "fonction");
         this.c3a.ajouteInst(c3aInstFBegin);
         return function;
     }
@@ -85,18 +85,18 @@ public class Sc2C3a extends SaDepthFirstVisitor<C3aOperand> {
     @Override
     public C3aOperand visit(SaLDec node) {
 
-       if (this.ts.getFct(node.getTete().getNom()).saDecFonc.getParametres() != null) {
-           visit(this.ts.getFct(node.getTete().getNom()).saDecFonc.getParametres().getQueue());
-       }
+//       if (this.ts.getFct(node.getTete().getNom()).saDecFonc.getParametres() != null) {
+//           visit(this.ts.getFct(node.getTete().getNom()).saDecFonc.getParametres().getQueue());
+//       }
 
-       if (this.ts.fonctions.containsKey(node)) {
-           if (this.ts.getFct(node.getTete().getNom()).saDecFonc.getParametres() != null) {
-               visit(this.ts.getFct(node.getTete().getNom()).saDecFonc.getParametres());
-           }
+       if (this.ts.getFct(node.getTete().getNom()).saDecFonc.tsItem.identif != null) {
+//           if (this.ts.getFct(node.getTete().getNom()).saDecFonc.getParametres() != null) {
+//               visit(this.ts.getFct(node.getTete().getNom()).saDecFonc.getParametres());
+//           }
 
 
-           visit((SaInstBloc) this.ts.getFct(node.getTete().getNom()).saDecFonc.getCorps());
-
+//           visit((SaInstBloc) this.ts.getFct(node.getTete().getNom()).saDecFonc.getCorps());
+//           System.out.println(" ICI " + this.ts.getFct(node.getTete().getNom()).saDecFonc.tsItem.nbArgs);
            return new C3aFunction(this.ts.getFct(node.getTete().getNom()).saDecFonc.tsItem);
         }
         else return null;
