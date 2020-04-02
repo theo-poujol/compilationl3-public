@@ -167,7 +167,7 @@ def evaluateDiff(inputFiles, extension, path, name) :
 ################################################################################
 def evaluateNasm(inputFiles) :
   for filename in inputFiles :
-    nasmFilename = changeExtension(filename, ".nasm")
+    nasmFilename = changeExtension(filename, ".pre-nasm")
     objectFilename = changeExtension(filename, ".o")
     execFilename = changeExtension(filename, ".exe")
     outFilename = changeExtension(filename, ".out")
@@ -187,7 +187,7 @@ def evaluateNasm(inputFiles) :
       print(out, file=sys.stderr)
       continue
 
-  return evaluateDiff(inputFiles, ".out", "out-ref/", "Execution du nasm")
+  return evaluateDiff(inputFiles, ".pre-nasm", "prenasm-ref/", "Execution du nasm")
 ################################################################################
 
 ################################################################################
@@ -233,7 +233,8 @@ if __name__ == "__main__" :
   saOutEvaluation = evaluateDiff(inputFiles, ".saout", "saout-ref/", "Execution de l'arbre abstrait")
   tsEvaluation = evaluateDiff(inputFiles, ".ts", "ts-ref/", "Table des Symboles")
   c3aEvaluation = evaluateDiff(inputFiles, ".c3aout", "c3aout-ref/", "Code 3 Adresses")
-  nasmEvaluation = evaluateNasm(inputFiles)
+  nasmEvaluation = evaluateDiff(inputFiles, ".pre-nasm", "prenasm-ref/", "Pre nasm")
+  #nasmEvaluation = evaluateNasm(inputFiles)
 
   useColor = True
 
