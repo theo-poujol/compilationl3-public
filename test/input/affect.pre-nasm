@@ -1,0 +1,8 @@
+main :	push	ebp	;
+	mov	ebp,	esp	;
+	sub	ebp,	0	;
+	mov	eax	;
+	call	iprintLF	;
+	add	esp,	0	;
+	pop	ebp	;
+	ret	;

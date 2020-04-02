@@ -16,6 +16,11 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
         this.tableGlobale = table;
         this.nasm = new Nasm(this.tableGlobale);
         this.currentFct = this.tableGlobale.getFct("main");
+
+        for (int i = 0; i < this.c3a.listeInst.size(); ++i) {
+            visit(this.c3a.listeInst.get(i));
+        }
+
     }
 
 
@@ -74,14 +79,22 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
                 inst.label.accept(this) :
                 null;
 
-        this.nasm.ajouteInst(new NasmPush(label, ebp,""));
+
+        this.nasm.ajouteInst(new NasmPush(new NasmLabel(inst.val.identif), ebp,""));
         this.nasm.ajouteInst(new NasmMov(label, ebp,esp,""));
 
-        int nb_varLoc = inst.val.saDecFonc.getVariable().length();
-        if (nb_varLoc != 0) {
-            Nasm.REG_EBP = Nasm.REG_EBP - 4*nb_varLoc;
-            this.nasm.ajouteInst(new NasmSub(label, ebp, new NasmConstant(4*nb_varLoc),""));
+        if (inst.val.saDecFonc.getVariable() != null) {
+            int nb_varLoc = inst.val.saDecFonc.getVariable().length();
+            if (nb_varLoc != 0) {
+                Nasm.REG_EBP = Nasm.REG_EBP - 4*nb_varLoc;
+                this.nasm.ajouteInst(new NasmSub(label, ebp, new NasmConstant(4*nb_varLoc),""));
+            }
         }
+
+        else {
+            this.nasm.ajouteInst(new NasmSub(label, ebp, new NasmConstant(0),""));
+        }
+
 
 
         return null;
@@ -184,10 +197,18 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
 
         NasmLabel esp = new NasmLabel("esp");
+        NasmLabel ebp = new NasmLabel("ebp");
 
-        int nb_var = this.currentFct.saDecFonc.getVariable().length();
-        Nasm.REG_ESP = Nasm.REG_ESP + nb_var;
-        this.nasm.ajouteInst(new NasmAdd(label, esp, new NasmConstant(4*nb_var),""));
+        if (this.currentFct.saDecFonc.getVariable() != null) {
+            int nb_var = this.currentFct.saDecFonc.getVariable().length();
+            Nasm.REG_ESP = Nasm.REG_ESP + nb_var;
+            this.nasm.ajouteInst(new NasmAdd(label, esp, new NasmConstant(4*nb_var),""));
+        }
+        else {
+            this.nasm.ajouteInst(new NasmAdd(label, esp, new NasmConstant(0),""));
+        }
+
+        this.nasm.ajouteInst(new NasmPop(label,ebp,inst.comment ));
         this.nasm.ajouteInst(new NasmRet(label, ""));
         return null;
     }
