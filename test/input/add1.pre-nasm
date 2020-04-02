@@ -1,9 +1,13 @@
+	call	main	;
+	mov	ebx,	0	;
+	mov	eax,	1	;
+	int 0x80	;
 main :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	ebp,	0	;
-	mov	r0,	3	;
-	add	r0,	10	;
-	mov	eax,	r0	;
+	mov	eax,	3	;
+	add	eax,	10	;
+	mov	eax,	eax	;
 	call	iprintLF	;
 	add	esp,	0	;
 	pop	ebp	;
