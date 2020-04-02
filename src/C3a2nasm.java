@@ -42,18 +42,19 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
         NasmOperand op1 = inst.op1.accept(this);
         NasmOperand op2 = inst.op2.accept(this);
         NasmOperand dest = inst.result.accept(this);
+        this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
+        this.nasm.ajouteInst(new NasmAdd(label, dest, op2,""));
 
-
-        if (dest.isGeneralRegister()) {
-            NasmRegister reg = (NasmRegister) dest;
-            this.nasm.ajouteInst(new NasmMov(label, reg, op1, ""));
-            this.nasm.ajouteInst(new NasmAdd(label, reg, op2,""));
-        }
-
-        else {
-            this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
-            this.nasm.ajouteInst(new NasmAdd(label, dest, op2,""));
-        }
+//        if (dest.isGeneralRegister()) {
+//            NasmRegister reg = (NasmRegister) dest;
+//            this.nasm.ajouteInst(new NasmMov(label, reg, op1, ""));
+//            this.nasm.ajouteInst(new NasmAdd(label, reg, op2,""));
+//        }
+//
+//        else {
+//            this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
+//            this.nasm.ajouteInst(new NasmAdd(label, dest, op2,""));
+//        }
 
 
 
@@ -322,7 +323,7 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
     public NasmOperand visit(C3aTemp oper) {
 
         NasmRegister reg = new NasmRegister(oper.num);
-        if (reg.isGeneralRegister()) reg.colorRegister(oper.num);
+//        if (reg.isGeneralRegister()) reg.colorRegister(oper.num);
         return reg;
     }
 
