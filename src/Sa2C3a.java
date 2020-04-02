@@ -2,11 +2,11 @@ import c3a.*;
 import sa.*;
 import ts.Ts;
 
-public class Sc2C3a extends SaDepthFirstVisitor<C3aOperand> {
+public class Sa2C3a extends SaDepthFirstVisitor<C3aOperand> {
     private C3a c3a;
     private Ts ts;
 
-    public Sc2C3a(SaNode root, Ts table) {
+    public Sa2C3a(SaNode root, Ts table) {
         this.c3a = new C3a();
         this.ts = table;
         root.accept(this);

@@ -1,5 +1,6 @@
 import c3a.C3a;
 import c3a.C3aEval;
+import nasm.Nasm;
 import sc.parser.*;
 import sc.lexer.*;
 import sc.node.*;
@@ -58,7 +59,7 @@ public class Compiler
         saEval.affiche(baseName);
 
 	    System.out.println("[C3A]");
-	    C3a c3a = new Sc2C3a(saRoot, table).getC3a();
+	    C3a c3a = new Sa2C3a(saRoot, table).getC3a();
 	    c3a.affiche(baseName);
 
 
@@ -66,19 +67,18 @@ public class Compiler
 	    C3aEval c3aEval = new C3aEval(c3a, table);
 	    c3aEval.affiche(baseName);
 
-	    /*System.out.println("[NASM]");
-	    Nasm nasm = new C3a2nasm(c3a, table).getNasm();
-	    nasm.affiche(baseName);
+        System.out.print("[BUILD PRE NASM] ");
+        Nasm nasm = new C3a2nasm(c3a, table).getNasm();
+        System.out.println("[PRINT PRE NASM] ");
+        nasm.affichePre(baseName);
 
-	    System.out.println("[FLOW GRAPH]");
+	    /*System.out.println("[FLOW GRAPH]");
 	    Fg fg = new Fg(nasm);
 	    fg.affiche(baseName);
 
 	    System.out.println("[FLOW GRAPH SOLVE]");
 	    FgSolution fgSolution = new FgSolution(nasm, fg);
 	    fgSolution.affiche(baseName);*/
-
-
 
         }
         catch(Exception e){
