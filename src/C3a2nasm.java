@@ -1,6 +1,5 @@
 import c3a.*;
-import nasm.Nasm;
-import nasm.NasmOperand;
+import nasm.*;
 import ts.Ts;
 import ts.TsItemFct;
 
@@ -25,6 +24,16 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
     @Override
     public NasmOperand visit(C3aInstAdd inst) {
+
+        NasmOperand label = (inst.label != null) ?
+                            inst.label.accept(this) :
+                            null;
+        NasmOperand op1 = inst.op1.accept(this);
+        NasmOperand op2 = inst.op2.accept(this);
+        NasmOperand dest = inst.result.accept(this);
+
+        this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
+        this.nasm.ajouteInst(new NasmAdd(label, dest, op2,""));
         return null;
     }
 
@@ -40,6 +49,11 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
     @Override
     public NasmOperand visit(C3aInst inst) {
+
+        NasmOperand label = (inst.label != null) ?
+                inst.label.accept(this) :
+                null;
+
         return null;
     }
 
@@ -50,6 +64,15 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
     @Override
     public NasmOperand visit(C3aInstMult inst) {
+        NasmOperand label = (inst.label != null) ?
+                inst.label.accept(this) :
+                null;
+        NasmOperand op1 = inst.op1.accept(this);
+        NasmOperand op2 = inst.op2.accept(this);
+        NasmOperand dest = inst.result.accept(this);
+
+        this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
+        this.nasm.ajouteInst(new NasmMul(label, dest, op2,""));
         return null;
     }
 
@@ -60,6 +83,15 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
     @Override
     public NasmOperand visit(C3aInstSub inst) {
+        NasmOperand label = (inst.label != null) ?
+                inst.label.accept(this) :
+                null;
+        NasmOperand op1 = inst.op1.accept(this);
+        NasmOperand op2 = inst.op2.accept(this);
+        NasmOperand dest = inst.result.accept(this);
+
+        this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
+        this.nasm.ajouteInst(new NasmSub(label, dest, op2,""));
         return null;
     }
 

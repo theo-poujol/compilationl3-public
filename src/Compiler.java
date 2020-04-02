@@ -72,6 +72,9 @@ public class Compiler
         System.out.println("[PRINT PRE NASM] ");
         nasm.affichePre(baseName);
 
+        System.out.println("[PRINT NASM]");
+        nasm.affiche(baseName);
+
 	    /*System.out.println("[FLOW GRAPH]");
 	    Fg fg = new Fg(nasm);
 	    fg.affiche(baseName);
