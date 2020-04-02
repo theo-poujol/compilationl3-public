@@ -4,7 +4,7 @@
 	int 0x80	;
 main :	push	ebp	;
 	mov	ebp,	esp	;
-	sub	ebp,	0	;
+	sub	esp,	0	;
 	mov	eax,	3	;
 	add	eax,	10	;
 	mov	eax,	eax	;

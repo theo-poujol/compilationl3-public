@@ -30,12 +30,19 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
     @Override
     public NasmOperand visit(C3aInstAdd inst) {
 
+
+
         NasmOperand label = (inst.label != null) ?
                             inst.label.accept(this) :
                             null;
+
+
+
+
         NasmOperand op1 = inst.op1.accept(this);
         NasmOperand op2 = inst.op2.accept(this);
         NasmOperand dest = inst.result.accept(this);
+
 
         if (dest.isGeneralRegister()) {
             NasmRegister reg = (NasmRegister) dest;
@@ -47,6 +54,10 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
             this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
             this.nasm.ajouteInst(new NasmAdd(label, dest, op2,""));
         }
+
+
+
+
 
         return dest;
     }
@@ -118,11 +129,11 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
         if (variable) {
             int nb_varLoc = inst.val.saDecFonc.getVariable().length();
             Nasm.REG_EBP = Nasm.REG_EBP - 4*nb_varLoc;
-            this.nasm.ajouteInst(new NasmSub(label, ebp, new NasmConstant(4*nb_varLoc),""));
+            this.nasm.ajouteInst(new NasmSub(label, esp, new NasmConstant(4*nb_varLoc),""));
         }
 
         else {
-            this.nasm.ajouteInst(new NasmSub(label, ebp, new NasmConstant(0),""));
+            this.nasm.ajouteInst(new NasmSub(label, esp, new NasmConstant(0),""));
         }
 
 
