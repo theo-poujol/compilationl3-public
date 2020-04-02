@@ -69,12 +69,9 @@ ldf =
 df =
 {def_fct} id par_o ldv par_f  ldvo ibloc;
 
-ibloc =
-{ldi} acc_o ldi acc_f;
 
-ldi =
-{ldi_list} inst_bloc ldi |
-{ldi_vide} ;
+
+
 
 
 inst_bloc =
@@ -86,6 +83,12 @@ inst_bloc =
 {ecriture} ecrire |
 {lire} lire;
 
+ibloc =
+{ldi} acc_o ldi acc_f;
+
+ldi =
+{ldi_list} inst_bloc ldi |
+{ldi_vide} ;
 
 iapp =
 {app} app pvir;
@@ -120,7 +123,6 @@ dvar =
 {dv_simple} ent  id|
 {dv_derive} ent  id croch_o nombre croch_f;
 
-
 lde =
 {lde_list} expr lde |
 {lde_list_vir} vir lde |
@@ -153,12 +155,10 @@ expr5 =
 {expr_non} non expr5 |
 {expr6} expr6;
 
-
 expr6 =
 {expr_par} par_o expr par_f |
 {expr_nb} nombre |
 {expr_var} var;
-
 
 ecrire =
 {ecr_appel} ecr par_o app  par_f pvir |

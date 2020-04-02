@@ -57,6 +57,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
                 nbArgs = node.getParametres().length();
                 this.tableLocale.addParam(node.getParametres().getTete().getNom());
+                System.out.println("c ajouté");
 
                 if (node.getParametres().getQueue() != null) {
                     addRecursivesParams(node.getParametres().getQueue());
@@ -97,20 +98,29 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 //        }
 
 
+
         if (this.tableLocale == null) {
             if (this.tableGlobale.getVar(node.getNom()) == null)
                 node.tsItem = this.tableGlobale.addVar(node.getNom(), 1);
         }
 
 
-        else {
-            if (this.tableLocale.getVar(node.getNom()) != null) {
-                if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
-                    if (this.tableGlobale.getVar(node.getNom()) == null)
-                        node.tsItem = this.tableGlobale.addVar(node.getNom(), 1);
-                }
-            }
-        }
+//        else {
+//            if (this.tableLocale.getVar(node.getNom()) != null) {
+//                if (!(this.tableLocale.getVar(node.getNom()).isParam)) {
+//                    if (this.tableGlobale.getVar(node.getNom()) == null) {
+//                        node.tsItem = this.tableGlobale.addVar(node.getNom(), 1);
+//                    }
+//
+//                }
+////                else {
+////                    if (this.tableGlobale.getVar(node.getNom()) != null) {
+////                        this.tableGlobale.variables.remove(node.getNom());
+////                        node.tsItem = this.tableGlobale.addParam(node.getNom());
+////                    }
+////                }
+//            }
+//        }
 
         return null;
     }

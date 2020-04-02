@@ -11,7 +11,7 @@ public class SaVarSimple implements SaVar{
     }
 
     public String getNom(){return this.nom;}
-    
+    public int getTaille() {return 1;}
     public <T> T accept(SaVisitor <T> visitor) {
         return visitor.visit(this);
     }

@@ -14,7 +14,7 @@ public class SaVarIndicee implements SaVar{
 
     public String getNom(){return this.nom;}
     public SaExp getIndice(){return this.indice;}
-    
+    public int getTaille() { return tsItem.taille; }
     public <T> T accept(SaVisitor <T> visitor) {
         return visitor.visit(this);
     }
