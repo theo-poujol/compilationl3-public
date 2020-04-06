@@ -8,7 +8,7 @@ main :	push	ebp	;
 	mov	eax	;
 	call	iprintLF	;
 	mov	r1	;
-	imul	r1,	1	;
+	sub	r1,	1	;
 l1 :	add	esp,	0	;
 l1 :	pop	ebp	;
 l1 :	ret	;

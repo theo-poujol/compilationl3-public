@@ -5,10 +5,12 @@
 main :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	esp,	0	;
-	mov	r0,	6	;
-	idiv	3	;
+	mov	eax,	6	;
+	mov	r4,	3	;
+	idiv	r4	;
+	mov	r0,	eax	;
 	mov	r1,	3	;
-	imul	r1,	r0	;
+	sub	r1,	r0	;
 	mov	eax,	r1	;
 	call	iprintLF	;
 	add	esp,	0	;

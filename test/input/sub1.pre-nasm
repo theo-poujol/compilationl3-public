@@ -6,7 +6,7 @@ main :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	esp,	0	;
 	mov	r0,	10	;
-	imul	r0,	5	;
+	sub	r0,	5	;
 	mov	eax,	r0	;
 	call	iprintLF	;
 	add	esp,	0	;

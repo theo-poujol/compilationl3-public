@@ -108,16 +108,20 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
                 null;
 
         NasmLabel ebp =  new NasmLabel("ebp");
+        this.nasm.newRegister();
         NasmLabel esp =  new NasmLabel("esp");
-
+        this.nasm.newRegister();
 
         if (this.currentFct.identif.equals("main")) {
-            NasmLabel eax =  new NasmLabel("eax");
-            NasmLabel ebx =  new NasmLabel("ebx");
+            NasmRegister reg_eax = this.nasm.newRegister();
+            reg_eax.colorRegister(Nasm.REG_EAX);
+
+            NasmRegister reg_ebx = this.nasm.newRegister();
+            reg_ebx.colorRegister(Nasm.REG_EBX);
 
             this.nasm.ajouteInst(new NasmCall(label, new NasmLabel(inst.val.identif),""));
-            this.nasm.ajouteInst(new NasmMov(label, ebx, new NasmConstant(0), ""));
-            this.nasm.ajouteInst(new NasmMov(label, eax, new NasmConstant(1), ""));
+            this.nasm.ajouteInst(new NasmMov(label, reg_ebx, new NasmConstant(0), ""));
+            this.nasm.ajouteInst(new NasmMov(label, reg_eax, new NasmConstant(1), ""));
             this.nasm.ajouteInst(new NasmInt(null,""));
 
         }
@@ -205,7 +209,7 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
         NasmOperand dest = inst.result.accept(this);
 
         this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
-        this.nasm.ajouteInst(new NasmMul(label, dest, op2,""));
+        this.nasm.ajouteInst(new NasmSub(label, dest, op2,""));
         return dest;
     }
 
@@ -223,11 +227,40 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
         NasmOperand op2 = inst.op2.accept(this);
         NasmOperand dest = inst.result.accept(this);
 
+        NasmOperand rg = dest;
 
 
+
+
+
+        if (rg.isGeneralRegister()) {
+            System.out.println("ici2" + ((NasmRegister) rg).val);
+
+            System.out.println(this.nasm.getTempCounter());
+            ((NasmRegister) rg).colorRegister(Nasm.REG_EAX);
+        }
 
         this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
-        this.nasm.ajouteInst(new NasmDiv(label, op2,""));
+
+        if (!(op2 instanceof NasmRegister)) {
+            NasmRegister r = this.nasm.newRegister();
+            System.out.println(this.nasm.getTempCounter());
+            System.out.println(r.val);
+            this.nasm.ajouteInst(new NasmMov(label, r, op2,""));
+            this.nasm.ajouteInst(new NasmDiv(label, r,""));
+        }
+        else this.nasm.ajouteInst(new NasmDiv(label, op2,""));
+
+        if (dest.isGeneralRegister()) {
+            NasmRegister rX = null;
+            if (((NasmRegister) dest).val == Nasm.REG_EAX) rX = new NasmRegister(0);
+            if (((NasmRegister) dest).val == Nasm.REG_EBX) rX = new NasmRegister(1);
+            if (((NasmRegister) dest).val == Nasm.REG_ECX) rX = new NasmRegister(2);
+            if (((NasmRegister) dest).val == Nasm.REG_EDX) rX = new NasmRegister(3);
+            this.nasm.ajouteInst(new NasmMov(label, rX, dest,""));
+        }
+
+
         return dest;
     }
 
