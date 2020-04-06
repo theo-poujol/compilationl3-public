@@ -5,6 +5,10 @@
 main :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	esp,	0	;
+	mov	l0,	1	;
+	mov	r4,	10	;
+	cmp	r4,	3	;on passe par un registre temporaire
+	jl	l0	;ICI
 l0 :	mov	eax,	r0	;
 l0 :	call	iprintLF	;
 	add	esp,	0	;
