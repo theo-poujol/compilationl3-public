@@ -5,14 +5,14 @@
 main :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	esp,	0	;
-	mov	eax,	20	; TEST 2
-	mov	r4,	5	; TEST 3
+	mov	eax,	20	;
+	mov	r4,	5	;
 	idiv	r4	;
-	mov	r0,	eax	; TEST 5
-	mov	eax,	eax	; TEST 2
-	mov	r8,	2	; TEST 3
-	idiv	r8	;
-	mov	r1,	ebx	; TEST 5
+	mov	r0,	r0	;
+	mov	eax,	r0	;
+	mov	r7,	2	;
+	idiv	r7	;
+	mov	r1,	r1	;
 	mov	eax,	r1	;
 	call	iprintLF	;
 	add	esp,	0	;

@@ -5,8 +5,8 @@
 main :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	esp,	0	;
-	mov	r4,	1	;
-	cmp	r4,	0	;
+	mov	r2,	1	;
+	cmp	r2,	0	;
 	je	l0	;
 	mov	eax,	1	;
 	call	iprintLF	;
