@@ -3,6 +3,7 @@ package nasm;
 public class NasmLabel extends NasmOperand {
     public String val;
 
+
     public NasmLabel(String val){
 	this.val = val;
     }

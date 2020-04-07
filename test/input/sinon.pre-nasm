@@ -5,8 +5,12 @@
 main :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	esp,	0	;
+	mov	r4,	0	;
+	cmp	r4,	0	;
+	je	l0	;
 	mov	eax,	1	;
 	call	iprintLF	;
+	jmp	l1	;
 l0 :	mov	eax,	0	;
 	call	iprintLF	;
 l1 :	add	esp,	0	;
