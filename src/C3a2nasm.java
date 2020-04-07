@@ -43,7 +43,7 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
         NasmOperand op2 = inst.op2.accept(this);
         NasmOperand dest = inst.result.accept(this);
         this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
-        this.nasm.ajouteInst(new NasmAdd(label, dest, op2,""));
+        this.nasm.ajouteInst(new NasmAdd(null, dest, op2,""));
 
 //        if (dest.isGeneralRegister()) {
 //            NasmRegister reg = (NasmRegister) dest;
@@ -175,6 +175,8 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
 
         NasmRegister rX = new NasmRegister(this.nasm.getTempCounter());
+
+
 
         this.nasm.ajouteInst(new NasmMov(label, rX, new NasmConstant(1),""));
         this.nasm.ajouteInst(new NasmCmp(label, op1, op2,""));
@@ -333,6 +335,28 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
     @Override
     public NasmOperand visit(C3aInstJumpIfEqual inst) {
+
+        NasmOperand label = (inst.label != null) ?
+                inst.label.accept(this) :
+                null;
+
+        NasmOperand jumpAdress = inst.result.accept(this);
+        NasmOperand dest = inst.op1.accept(this);
+        NasmOperand source = inst.op2.accept(this);
+
+        if (dest instanceof NasmConstant) {
+            NasmRegister register = this.nasm.newRegister();
+            this.nasm.ajouteInst(new NasmMov(label, register, dest,""));
+            this.nasm.ajouteInst(new NasmCmp(label, register, source, ""));
+            this.nasm.ajouteInst(new NasmJe(label, jumpAdress,""));
+        }
+        else {
+            this.nasm.ajouteInst(new NasmCmp(label, dest, source, ""));
+            this.nasm.ajouteInst(new NasmJe(label, jumpAdress,""));
+        }
+
+
+
         return null;
     }
 
@@ -343,7 +367,14 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
     @Override
     public NasmOperand visit(C3aInstJump inst) {
-        inst.result.accept(this);
+
+        NasmOperand label = (inst.label != null) ?
+                inst.label.accept(this) :
+                null;
+
+        NasmOperand adress = inst.result.accept(this);
+
+        this.nasm.ajouteInst(new NasmJmp(label, adress, ""));
         return null;
     }
 

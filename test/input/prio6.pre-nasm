@@ -9,16 +9,19 @@ main :	push	ebp	;
 	imul	r2,	3	;
 	mov	r3,	1	;
 	add	r3,	r2	;
-	mov	l2,	1	;
+	mov	r8,	1	;
 	cmp	r3,	0	;
-	jl	l2	;ICI
+	jl	l2	;
+	mov	r8,	0	;
 l2 :	mov	r5,	2	;
-l2 :	add	r5,	2	;
-	mov	l3,	1	;
+	add	r5,	2	;
+	mov	r10,	1	;
 	cmp	r5,	0	;
-	jl	l3	;ICI
+	jl	l3	;
+	mov	r10,	0	;
+	jmp	l0	;
 l0 :	mov	eax,	r0	;
-l0 :	call	iprintLF	;
+	call	iprintLF	;
 	add	esp,	0	;
 	pop	ebp	;
 	ret	;
