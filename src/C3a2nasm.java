@@ -415,6 +415,27 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
     @Override
     public NasmOperand visit(C3aInstJumpIfNotEqual inst) {
 
+        NasmOperand label = (inst.label != null) ?
+                inst.label.accept(this) :
+                null;
+
+        NasmOperand jumpAdress = inst.result.accept(this);
+        NasmOperand dest = inst.op1.accept(this);
+        NasmOperand source = inst.op2.accept(this);
+
+        NasmOperand resLabel = inst.result.accept(this);
+
+        if (dest instanceof NasmConstant) {
+            NasmRegister register = this.nasm.newRegister();
+            this.nasm.ajouteInst(new NasmMov(label, register, dest,""));
+            this.nasm.ajouteInst(new NasmCmp(null, register, source, ""));
+            this.nasm.ajouteInst(new NasmJne(null, jumpAdress,""));
+        }
+        else {
+            this.nasm.ajouteInst(new NasmCmp(label, dest, source, ""));
+            this.nasm.ajouteInst(new NasmJne(null, jumpAdress,""));
+        }
+
         
         return null;
     }
