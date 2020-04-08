@@ -53,23 +53,12 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
         NasmOperand op1 = inst.op1.accept(this);
         NasmOperand op2 = inst.op2.accept(this);
         NasmOperand dest = inst.result.accept(this);
+
+
+
+
         this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
         this.nasm.ajouteInst(new NasmAdd(null, dest, op2,""));
-
-//        if (dest.isGeneralRegister()) {
-//            NasmRegister reg = (NasmRegister) dest;
-//            this.nasm.ajouteInst(new NasmMov(label, reg, op1, ""));
-//            this.nasm.ajouteInst(new NasmAdd(label, reg, op2,""));
-//        }
-//
-//        else {
-//            this.nasm.ajouteInst(new NasmMov(label, dest, op1, ""));
-//            this.nasm.ajouteInst(new NasmAdd(label, dest, op2,""));
-//        }
-
-
-
-
 
         return dest;
     }
@@ -470,7 +459,8 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
         NasmOperand op = inst.op1.accept(this);
 
-        NasmConstant nbVarRetour = new NasmConstant(this.currentFct.getTable().nbVar());
+
+        NasmConstant nbVarRetour = new NasmConstant(this.currentFct.getTable().nbVar() + this.currentFct.getTable().nbArg());
         NasmRegister ebp = new NasmRegister(Nasm.REG_EBP);
         ebp.colorRegister(Nasm.REG_EBP);
         NasmAddress ad = new NasmAddress(ebp,'+',nbVarRetour);
@@ -548,7 +538,7 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
         if (oper.item.isParam) {
             if (oper.index != null) ad = new NasmAddress(new NasmLabel(oper.item.identif),'-',oper.index.accept(this));
-            ad = new NasmAddress((new NasmLabel(oper.item.identif)));
+            else ad = new NasmAddress((new NasmLabel(oper.item.identif)));
 
             return ad;
         }
@@ -567,16 +557,7 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
                 NasmRegister regEbp = new NasmRegister(Nasm.REG_EBP);
                 regEbp.colorRegister(Nasm.REG_EBP);
                 ad = new NasmAddress(regEbp,'-',ebpAbs);
-//                if (oper.index != null) {
-//
-//
-//                    ad = new NasmAddress(new NasmRegister(Nasm.REG_EBP),'-',oper.index.accept(this));
-//                }
-//
-//                else {
-//                    NasmConstant ebpAbs = new NasmConstant(Math.abs(Nasm.REG_EBP));
-//                    ad = new NasmAddress(new NasmRegister(Nasm.REG_EBP),'-',ebpAbs);
-//                }
+
             }
             else {
                 if (oper.index != null) {

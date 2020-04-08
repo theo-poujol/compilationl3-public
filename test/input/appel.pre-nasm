@@ -7,7 +7,7 @@ procedure :	push	ebp	;
 	sub	esp,	0	;
 	mov	r0,	dword [a]	;
 	add	r0,	dword [b]	;
-	mov	dword [ebp+4*0],	r0	;
+	mov	dword [ebp+4*2],	r0	;
 	add	esp,	0	;
 	pop	ebp	;
 	ret	;
