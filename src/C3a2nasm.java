@@ -534,7 +534,6 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
             NasmOperand off = oper.index.accept(this);
         }
 
-        System.out.println("Adresse " + oper.item.adresse);
 
         NasmLabel var_nom = new NasmLabel(oper.item.identif);
 

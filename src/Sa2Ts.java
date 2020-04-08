@@ -58,7 +58,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
                 nbArgs = node.getParametres().length();
                 this.tableLocale.addParam(node.getParametres().getTete().getNom());
-                System.out.println("c ajouté");
+
 
                 if (node.getParametres().getQueue() != null) {
                     addRecursivesParams(node.getParametres().getQueue());
@@ -68,7 +68,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
             }
 
             if (node.getVariable() != null) {
-                System.out.println("JE RENTRE LA ICI TROPLILOLI");
+
                 addRecursiveVar(node.getVariable());
             }
 
@@ -79,7 +79,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 
         }
 
-        System.out.println(node.getNom() + nbArgs);
+
 
 
         this.tableLocale = null;
@@ -116,7 +116,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 //        }
 
 
-        System.out.println(node.getNom());
+
         if (this.tableLocale == null) {
 
             if (this.tableGlobale.getVar(node.getNom()) == null)
@@ -163,7 +163,7 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
 //        node.tsItem = this.tableGlobale.addVar(node.getNom(),1);
 
 
-        System.out.println("ZBEUBUEUEUEBU");
+
 
         if (this.tableLocale != null) {
             if (this.tableLocale.getVar(node.getNom()) != null)
@@ -183,7 +183,6 @@ public class Sa2Ts extends SaDepthFirstVisitor<Void> {
         if (this.tableGlobale.getFct(node.getNom()) != null) {
             node.tsItem = this.tableGlobale.getFct(node.getNom());
             if (node.tsItem.nbArgs != 0) {
-                System.out.println("APPEL " + node.tsItem.nbArgs);
                 node.getArguments().accept(this);
 //                node.tsItem.saDecFonc.accept(this);
             }

@@ -166,11 +166,6 @@ public class Sa2C3a extends SaDepthFirstVisitor<C3aOperand> {
             fct = nomFct;
         }
 
-
-        System.out.println("FONCTION " +  fct);
-        System.out.println("ARGS " + this.ts.getTableLocale(fct).nbArg());
-        System.out.println("VAR " + this.ts.getTableLocale(fct).nbVar());
-
         if (this.ts.getTableLocale(fct).getVar(nom) != null) {
             if (this.ts.getTableLocale(fct).getVar(nom).taille > 1) {
                 op = visit((SaVarIndicee) node.getLhs());
@@ -216,7 +211,7 @@ public class Sa2C3a extends SaDepthFirstVisitor<C3aOperand> {
 
 
         if (this.ts.getVar(node.getTete().getNom()) != null) {
-            System.out.println("VAR " + node.getTete().getNom());
+
             if (this.ts.getVar(node.getTete().getNom()).taille > 1) visit((SaDecTab) node.getTete());
             else visit((SaDecVar) node.getTete());
 
@@ -249,7 +244,8 @@ public class Sa2C3a extends SaDepthFirstVisitor<C3aOperand> {
     public C3aOperand visit(SaExpAppel node) {
 
         C3aTemp temp = this.c3a.newTemp();
-        addRecursiveCall(node.getVal().getArguments());
+
+        if (node.getVal().getArguments() != null) addRecursiveCall(node.getVal().getArguments());
 
         C3aInstCall call = new C3aInstCall(new C3aFunction(this.ts.getFct(node.getVal().getNom()).saDecFonc.tsItem),temp,"");
         this.c3a.ajouteInst(call);
