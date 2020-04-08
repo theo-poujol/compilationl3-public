@@ -5,8 +5,8 @@
 main :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	esp,	0	;
-	mov,	123	;
-	mov	eax	;
+	mov	dword [a],	123	;
+	mov	eax,	dword [a]	;
 	call	iprintLF	;
 	add	esp,	0	;
 	pop	ebp	;

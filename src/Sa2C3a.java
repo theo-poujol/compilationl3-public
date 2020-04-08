@@ -1,6 +1,12 @@
 import c3a.*;
 import sa.*;
 import ts.Ts;
+import ts.TsItemFct;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 public class Sa2C3a extends SaDepthFirstVisitor<C3aOperand> {
     private C3a c3a;
@@ -153,14 +159,37 @@ public class Sa2C3a extends SaDepthFirstVisitor<C3aOperand> {
 
         String nom = node.getLhs().getNom();
         C3aOperand op = null;
-        if (this.ts.getVar(nom).taille > 1) {
-            op = visit((SaVarIndicee) node.getLhs());
+
+        String fct = "";
+
+        for (String nomFct : this.ts.fonctions.keySet()) {
+            fct = nomFct;
+        }
+
+
+        System.out.println("FONCTION " +  fct);
+        System.out.println("ARGS " + this.ts.getTableLocale(fct).nbArg());
+        System.out.println("VAR " + this.ts.getTableLocale(fct).nbVar());
+
+        if (this.ts.getTableLocale(fct).getVar(nom) != null) {
+            if (this.ts.getTableLocale(fct).getVar(nom).taille > 1) {
+                op = visit((SaVarIndicee) node.getLhs());
+            }
+
+            else {
+                op = visit((SaVarSimple) node.getLhs());
+            }
         }
 
         else {
-            op = visit((SaVarSimple) node.getLhs());
-        }
+            if (this.ts.getVar(nom).taille > 1) {
+                op = visit((SaVarIndicee) node.getLhs());
+            }
 
+            else {
+                op = visit((SaVarSimple) node.getLhs());
+            }
+        }
 
         C3aInstAffect affect = new C3aInstAffect(visit(node.getRhs()),op,"");
         this.c3a.ajouteInst(affect);

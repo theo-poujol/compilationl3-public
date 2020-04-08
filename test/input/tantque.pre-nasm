@@ -5,19 +5,19 @@
 main :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	esp,	0	;
-	mov,	10	;
+	mov	dword [a],	10	;
 l0 :	mov	r0,	1	;
 	mov	r3,	2	;
-	cmp	r3	;on passe par un registre temporaire
+	cmp	r3,	dword [a]	;on passe par un registre temporaire
 	jl	l2	;
 	mov	r0,	0	;
 l2 :	cmp	r0,	0	;
 	je	l1	;
-	mov	eax	;
+	mov	eax,	dword [a]	;
 	call	iprintLF	;
-	mov	r1	;
+	mov	r1,	dword [a]	;
 	sub	r1,	1	;
-	mov,	r1	;
+	mov	dword [a],	r1	;
 	jmp	l0	;
 l1 :	add	esp,	0	;
 l1 :	pop	ebp	;
