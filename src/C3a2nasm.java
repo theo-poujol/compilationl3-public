@@ -550,29 +550,68 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
         NasmAddress ad = null;
 
+
         if (oper.item.isParam) {
             ad = new NasmAddress(new NasmLabel(oper.item.identif),'-',oper.index.accept(this));
             return ad;
         }
+
+        else {
+
+            if (this.currentFct.getTable().getVar(oper.item.identif) != null) {
+
+                int cpt = 0;
+                for (String nomVar : this.currentFct.getTable().variables.keySet()) {
+                    cpt++;
+                    if (nomVar.equals(oper.item.identif)) break;
+                }
+
+                NasmConstant ebpAbs = new NasmConstant(Math.abs(cpt));
+                NasmRegister regEbp = new NasmRegister(Nasm.REG_EBP);
+                regEbp.colorRegister(Nasm.REG_EBP);
+                ad = new NasmAddress(regEbp,'-',ebpAbs);
+//                if (oper.index != null) {
+//
+//
+//                    ad = new NasmAddress(new NasmRegister(Nasm.REG_EBP),'-',oper.index.accept(this));
+//                }
+//
+//                else {
+//                    NasmConstant ebpAbs = new NasmConstant(Math.abs(Nasm.REG_EBP));
+//                    ad = new NasmAddress(new NasmRegister(Nasm.REG_EBP),'-',ebpAbs);
+//                }
+            }
+            else {
+                if (oper.index != null) {
+                    ad = new NasmAddress(new NasmLabel(oper.item.identif),'+',oper.index.accept(this));
+                }
+
+                else {
+                    ad = new NasmAddress(new NasmLabel(oper.item.identif));
+                }
+            }
+
+        }
+
 
 //        if (oper.index != null) {
 //
 //            ad = new NasmAddress(new NasmLabel(oper.item.identif),'+',oper.index.accept(this));
 //        }
 
-        else {
-            if (this.currentFct.getTable().getVar(oper.item.identif)  != null) {
-
-                NasmRegister reg = new NasmRegister(Nasm.REG_EBP);
-                reg.colorRegister(Nasm.REG_EBP);
-
-                if (oper.index != null)
-                    ad = new NasmAddress(reg,'-',oper.index.accept(this));
-                else ad = new NasmAddress(reg,'-',new NasmConstant(this.nasm.getTempCounter()+1));
-            }
-
-            else ad = new NasmAddress(new NasmLabel(oper.item.identif));
-        }
+//        else {
+//            if (this.currentFct.getTable().getVar(oper.item.identif)  != null) {
+//
+//                NasmRegister reg = new NasmRegister(Nasm.REG_EBP);
+//                reg.colorRegister(Nasm.REG_EBP);
+//
+//                if (oper.index != null)
+//                    ad = new NasmAddress(reg,'-',oper.index.accept(this));
+//                else ad = new NasmAddress(reg,'-',new NasmConstant(this.nasm.getTempCounter()+1));
+//            }
+//
+//            else ad = new NasmAddress(new NasmLabel(oper.item.identif));
+//        }
 
 
         return ad;

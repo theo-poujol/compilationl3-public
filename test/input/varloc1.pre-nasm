@@ -5,10 +5,10 @@
 procedure :	push	r-2	;
 	mov	r-2,	r-1	;
 	sub	r-1,	8	;
-	mov	dword [ebp-4*3],	2	;
-	mov	dword [ebp-4*3],	2	;
-	mov	esp,	dword [ebp-4*3]	;
-	add	esp,	dword [ebp-4*3]	;
+	mov	dword [ebp-4*1],	2	;
+	mov	dword [ebp-4*2],	2	;
+	mov	esp,	dword [ebp-4*1]	;
+	add	esp,	dword [ebp-4*2]	;
 	mov	dword [esp],	esp	;
 	add	r-1,	8	;
 	pop	ebp	;
