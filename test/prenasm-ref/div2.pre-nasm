@@ -9,7 +9,7 @@ main :	push	ebp	;
 	mov	r4,	5	;
 	idiv	r4	;
 	mov	r0,	eax	;
-	mov	eax,	eax	;
+	mov	eax,	r0	;
 	mov	r7,	2	;
 	idiv	r7	;
 	mov	r1,	ebx	;
