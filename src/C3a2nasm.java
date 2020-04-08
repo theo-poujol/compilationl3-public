@@ -87,6 +87,7 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
         NasmOperand r = inst.result.accept(this);
         NasmOperand nom = inst.op1.accept(this);
 
+       if (inst.op1 != null) inst.op1.accept(this);
 
         this.nasm.ajouteInst(new NasmSub(label, new NasmLabel("esp"), new NasmConstant(4), ""));
         this.nasm.ajouteInst(new NasmCall(label,nom,""));
@@ -446,6 +447,13 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
     @Override
     public NasmOperand visit(C3aInstParam inst) {
+
+        NasmOperand label = (inst.label != null) ?
+                inst.label.accept(this) :
+                null;
+
+
+        this.nasm.ajouteInst(new NasmPush(label, inst.op1.accept(this),""));
         return null;
     }
 
@@ -536,7 +544,9 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
 
         if (oper.item.isParam) {
-            ad = new NasmAddress(new NasmLabel(oper.item.identif),'-',oper.index.accept(this));
+            if (oper.index != null) ad = new NasmAddress(new NasmLabel(oper.item.identif),'-',oper.index.accept(this));
+            ad = new NasmAddress((new NasmLabel(oper.item.identif)));
+
             return ad;
         }
 
