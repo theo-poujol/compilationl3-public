@@ -10,7 +10,7 @@ main :	push	ebp	;
 	je	l0	;
 	mov	eax,	1	;
 	call	iprintLF	;
-	jmp	l1	;Jump
+	jmp	l1	;
 l0 :	mov	eax,	0	;
 	call	iprintLF	;
 l1 :	add	esp,	0	;

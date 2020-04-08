@@ -367,8 +367,8 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
             this.nasm.ajouteInst(new NasmAdd(label, reg_esp, new NasmConstant(0),""));
         }
 
-        this.nasm.ajouteInst(new NasmPop(label,reg_ebp,inst.comment ));
-        this.nasm.ajouteInst(new NasmRet(label, ""));
+        this.nasm.ajouteInst(new NasmPop(null,reg_ebp,inst.comment ));
+        this.nasm.ajouteInst(new NasmRet(null, ""));
         return null;
     }
 

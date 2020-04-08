@@ -5,11 +5,11 @@
 main :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	esp,	0	;
-	mov	r3,	1	;
-	cmp	r3,	0	;
+	mov	r2,	1	;
+	cmp	r2,	0	;
 	je	l1	;
-	mov	r4,	0	;
-	cmp	r4,	0	;
+	mov	r3,	0	;
+	cmp	r3,	0	;
 	je	l1	;
 	mov	r0,	1	;
 	jmp	l0	;

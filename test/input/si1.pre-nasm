@@ -11,5 +11,5 @@ main :	push	ebp	;
 	mov	eax,	1	;
 	call	iprintLF	;
 l0 :	add	esp,	0	;
-l0 :	pop	ebp	;
-l0 :	ret	;
+	pop	ebp	;
+	ret	;
