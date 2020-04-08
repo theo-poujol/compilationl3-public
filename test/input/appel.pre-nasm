@@ -19,6 +19,7 @@ main :	push	ebp	;
 	sub	esp,	4	;
 	call	procedure	;
 	pop	r1	;
+	add	esp,	8	;
 	mov	eax,	r1	;
 	call	iprintLF	;
 	add	esp,	0	;

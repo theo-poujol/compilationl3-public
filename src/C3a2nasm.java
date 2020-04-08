@@ -97,7 +97,10 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
 
 //        Nasm.REG_ESP = Nasm.REG_ESP + 4*inst.op1.val.getNbArgs();
-//        this.nasm.ajouteInst(new NasmAdd(null, new NasmLabel("esp"), new NasmConstant(4*inst.op1.val.getNbArgs()), ""));
+
+
+        if (this.tableGlobale.getFct(inst.op1.val.identif).nbArgs != 0) this.nasm.ajouteInst(new NasmAdd(null, new NasmLabel("esp"), new NasmConstant(4*inst.op1.val.getNbArgs()), ""));
+
         return r;
     }
 
