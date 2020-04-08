@@ -17,6 +17,17 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
         this.nasm = new Nasm(this.tableGlobale);
         this.currentFct = this.tableGlobale.getFct("main");
 
+        NasmRegister reg_eax = this.nasm.newRegister();
+        reg_eax.colorRegister(Nasm.REG_EAX);
+
+        NasmRegister reg_ebx = this.nasm.newRegister();
+        reg_ebx.colorRegister(Nasm.REG_EBX);
+
+        this.nasm.ajouteInst(new NasmCall(null, new NasmLabel("main"),""));
+        this.nasm.ajouteInst(new NasmMov(null, reg_ebx, new NasmConstant(0), ""));
+        this.nasm.ajouteInst(new NasmMov(null, reg_eax, new NasmConstant(1), ""));
+        this.nasm.ajouteInst(new NasmInt(null,""));
+
         for (int i = 0; i < this.c3a.listeInst.size(); ++i) {
             visit(this.c3a.listeInst.get(i));
         }
@@ -118,20 +129,20 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
 
 
-        if (this.currentFct.identif.equals("main")) {
-            NasmRegister reg_eax = this.nasm.newRegister();
-            reg_eax.colorRegister(Nasm.REG_EAX);
-
-            NasmRegister reg_ebx = this.nasm.newRegister();
-            reg_ebx.colorRegister(Nasm.REG_EBX);
-
-            System.out.println("jen suis a combien " + this.nasm.getTempCounter());
-            this.nasm.ajouteInst(new NasmCall(label, new NasmLabel(inst.val.identif),""));
-            this.nasm.ajouteInst(new NasmMov(label, reg_ebx, new NasmConstant(0), ""));
-            this.nasm.ajouteInst(new NasmMov(label, reg_eax, new NasmConstant(1), ""));
-            this.nasm.ajouteInst(new NasmInt(null,""));
-
-        }
+//        if (this.currentFct.identif.equals("main")) {
+//            NasmRegister reg_eax = this.nasm.newRegister();
+//            reg_eax.colorRegister(Nasm.REG_EAX);
+//
+//            NasmRegister reg_ebx = this.nasm.newRegister();
+//            reg_ebx.colorRegister(Nasm.REG_EBX);
+//
+//            System.out.println("jen suis a combien " + this.nasm.getTempCounter());
+//            this.nasm.ajouteInst(new NasmCall(label, new NasmLabel(inst.val.identif),""));
+//            this.nasm.ajouteInst(new NasmMov(label, reg_ebx, new NasmConstant(0), ""));
+//            this.nasm.ajouteInst(new NasmMov(label, reg_eax, new NasmConstant(1), ""));
+//            this.nasm.ajouteInst(new NasmInt(null,""));
+//
+//        }
 
 
 
@@ -544,11 +555,24 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
             return ad;
         }
 
-        if (oper.index != null) {
+//        if (oper.index != null) {
+//
+//            ad = new NasmAddress(new NasmLabel(oper.item.identif),'+',oper.index.accept(this));
+//        }
 
-            ad = new NasmAddress(new NasmLabel(oper.item.identif),'+',oper.index.accept(this));
+        else {
+            if (this.currentFct.getTable().getVar(oper.item.identif)  != null) {
+
+                NasmRegister reg = new NasmRegister(Nasm.REG_EBP);
+                reg.colorRegister(Nasm.REG_EBP);
+
+                if (oper.index != null)
+                    ad = new NasmAddress(reg,'-',oper.index.accept(this));
+                else ad = new NasmAddress(reg,'-',new NasmConstant(this.nasm.getTempCounter()+1));
+            }
+
+            else ad = new NasmAddress(new NasmLabel(oper.item.identif));
         }
-        else ad = new NasmAddress(new NasmLabel(oper.item.identif));
 
 
         return ad;
@@ -558,6 +582,6 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
     public NasmOperand visit(C3aFunction oper) {
 
 
-        return oper.accept(this);
+        return new NasmLabel(oper.getValue().identif);
     }
 }
