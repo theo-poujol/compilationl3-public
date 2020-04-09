@@ -537,8 +537,13 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
 
         if (oper.item.isParam) {
-            if (oper.index != null) ad = new NasmAddress(new NasmLabel(oper.item.identif),'-',oper.index.accept(this));
-            else ad = new NasmAddress((new NasmLabel(oper.item.identif)));
+
+            NasmRegister reg_ebp = new NasmRegister(Nasm.REG_EBP);
+            reg_ebp.colorRegister(Nasm.REG_EBP);
+
+            NasmConstant offset = new NasmConstant((8 + 4 * this.currentFct.nbArgs - 4*oper.item.adresse)/4);
+
+            ad = new NasmAddress(reg_ebp,'+',offset);
 
             return ad;
         }
@@ -547,13 +552,8 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
 
             if (this.currentFct.getTable().getVar(oper.item.identif) != null) {
 
-                int cpt = 0;
-                for (String nomVar : this.currentFct.getTable().variables.keySet()) {
-                    cpt++;
-                    if (nomVar.equals(oper.item.identif)) break;
-                }
 
-                NasmConstant ebpAbs = new NasmConstant(Math.abs(cpt));
+                NasmConstant ebpAbs = new NasmConstant(oper.item.adresse+1);
                 NasmRegister regEbp = new NasmRegister(Nasm.REG_EBP);
                 regEbp.colorRegister(Nasm.REG_EBP);
                 ad = new NasmAddress(regEbp,'-',ebpAbs);

@@ -7,16 +7,16 @@ section	.text
 global _start
 _start:
 	call	main	;
-	mov	ebx,	0	; valeur de retour du programme
+	mov	ebx,	0	;
 	mov	eax,	1	;
 	int 0x80	;
-main :	push	ebp	;sauvegarde la valeur de ebp
-	mov	ebp,	esp	;nouvelle valeur de ebp
-	sub	esp,	0	;allocation des variables locales
+main :	push	ebp	;
+	mov	ebp,	esp	;
+	sub	esp,	0	;
 	mov	eax,	3	;
 	add	eax,	10	;
-	mov	eax,	eax	;Write 1
-	call	iprintLF	;Write 2
-	add	esp,	0	;désallocation des variables locales
-	pop	ebp	;restaure la valeur de ebp
+	mov	eax,	eax	;
+	call	iprintLF	;
+	add	esp,	0	;
+	pop	ebp	;
 	ret	;

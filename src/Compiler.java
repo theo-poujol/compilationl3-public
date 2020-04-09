@@ -52,11 +52,11 @@ public class Compiler
 	    Ts table = new Sa2Ts(saRoot).getTableGlobale();
 	    table.afficheTout(baseName);
 
-//        System.out.print("[EXEC SA] ");
-//        SaEval saEval = new SaEval(saRoot, table);
+        System.out.print("[EXEC SA] ");
+        SaEval saEval = new SaEval(saRoot, table);
 
-//        System.out.println("[SA OUT]");
-//        saEval.affiche(baseName);
+        System.out.println("[SA OUT]");
+        saEval.affiche(baseName);
 
 	    System.out.println("[C3A]");
 	    C3a c3a = new Sa2C3a(saRoot, table).getC3a();

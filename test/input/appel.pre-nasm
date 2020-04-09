@@ -5,8 +5,8 @@
 procedure :	push	ebp	;
 	mov	ebp,	esp	;
 	sub	esp,	0	;
-	mov	r0,	dword [a]	;
-	add	r0,	dword [b]	;
+	mov	r0,	dword [ebp+4*4]	;
+	add	r0,	dword [ebp+4*3]	;
 	mov	dword [ebp+4*2],	r0	;
 	add	esp,	0	;
 	pop	ebp	;
