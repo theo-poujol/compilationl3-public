@@ -1,6 +1,10 @@
 Bonjour,
 
 Toutes les parties du code ont étées écrites par nous-même. Rien n'a été dupliqué.
+
+Nous avons eu des soucis avec le remote du squellette, nous avons dû récupérer et push chaque fichiers à chaque nouveau TP.
+Ce qui explique le chiffre important de lignes commit.
+
 Actuellement, nous nous sommes arrêtés à l'évaluation de FGS. Nous rencontrons des difficultés sur le calcul des équations des in et out.
 
 Nous avons légèremment modifié le script "evaluate.py" afin de pouvoir lancer les évaluations sur c3a, pre-nams, fg et fgs grâce à la méthode "evaluateDiff()".
