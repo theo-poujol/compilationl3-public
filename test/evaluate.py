@@ -1,5 +1,4 @@
 #! /usr/bin/python3
-#! /usr/bin/python3
 
 import sys
 import os
@@ -129,8 +128,8 @@ def evaluateSa(inputFiles) :
     
     saRef = refPath+"sa-ref/"+saFilename
     if not os.path.isfile(saRef) :
-      print("Fichier non trouvé : %s"%saRef, file=sys.stderr)
-      exit(1)
+      print("ATTENTION : Fichier non trouvé : %s"%saRef, file=sys.stderr)
+      continue
 
     res = subprocess.Popen("{} {} {}{}".format(compareArbres, saRef, inputPath, saFilename), shell=True, stdout=open(os.devnull, "w"), stderr=subprocess.PIPE).stderr.read()
     if "egaux" in str(res) :
@@ -153,8 +152,8 @@ def evaluateDiff(inputFiles, extension, path, name) :
     
     ref = refPath+path+producedFile
     if not os.path.isfile(ref) :
-      print("Fichier non trouvé : %s"%ref, file=sys.stderr)
-      exit(1)
+      print("ATTENTION : Fichier non trouvé : %s"%ref, file=sys.stderr)
+      continue
 
     res = subprocess.Popen("diff {} {}{}".format(ref, inputPath, producedFile), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.read()
     if len(res.strip()) == 0 :
@@ -231,9 +230,13 @@ if __name__ == "__main__" :
   deleteClasses()
 
   saEvaluation = evaluateSa(inputFiles)
+  saOutEvaluation = evaluateDiff(inputFiles, ".saout", "saout-ref/", "Execution de l'arbre abstrait")
   tsEvaluation = evaluateDiff(inputFiles, ".ts", "ts-ref/", "Table des Symboles")
-  c3aEvaluation = evaluateDiff(inputFiles, ".c3a", "c3a-ref/", "Code 3 Adresses")
-  nasmEvaluation = evaluateNasm(inputFiles)
+  c3aEvaluation = evaluateDiff(inputFiles, ".c3aout", "c3aout-ref/", "Code 3 Adresses")
+  PrenasmEvaluation = evaluateDiff(inputFiles, ".pre-nasm", "prenasm-ref/", "Pre nasm")
+  fgEvaluation = evaluateDiff(inputFiles, ".fg", "fg-ref/", "FG")
+  fgsEvaluation = evaluateDiff(inputFiles, ".fgs", "fgs-ref/", "FGS")
+  #PrenasmEvaluation = evaluateNasm(inputFiles)
 
   useColor = True
 
@@ -241,8 +244,11 @@ if __name__ == "__main__" :
     print("Légende : {}  {}  {}".format(green("CORRECT"), purple("INCORRECT"), red("NON-EXISTANT")))
 
   printEvaluationResult(sys.stdout, saEvaluation, useColor)
+  printEvaluationResult(sys.stdout, saOutEvaluation, useColor)
   printEvaluationResult(sys.stdout, tsEvaluation, useColor)
   printEvaluationResult(sys.stdout, c3aEvaluation, useColor)
-  printEvaluationResult(sys.stdout, nasmEvaluation, useColor)
+  printEvaluationResult(sys.stdout, PrenasmEvaluation, useColor)
+  printEvaluationResult(sys.stdout, fgEvaluation, useColor)
+  printEvaluationResult(sys.stdout, fgsEvaluation, useColor)
 ################################################################################
 
