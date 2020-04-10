@@ -11,9 +11,10 @@ public class Graph {
   }
 
     void check(Node n) {
-	if (n.mygraph != this)
-	    throw new Error("Graph.addEdge using nodes from the wrong graph");
-    }
+
+        if (n.mygraph != this)
+            throw new Error("Graph.addEdge using nodes from the wrong graph");
+        }
     
     public int nodeCount(){
 	return nodecount;
