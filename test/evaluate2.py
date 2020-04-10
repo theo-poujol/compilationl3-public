@@ -235,6 +235,7 @@ if __name__ == "__main__" :
   c3aEvaluation = evaluateDiff(inputFiles, ".c3aout", "c3aout-ref/", "Code 3 Adresses")
   PrenasmEvaluation = evaluateDiff(inputFiles, ".pre-nasm", "prenasm-ref/", "Pre nasm")
   fgEvaluation = evaluateDiff(inputFiles, ".fg", "fg-ref/", "FG")
+  fgsEvaluation = evaluateDiff(inputFiles, ".fgs", "fgs-ref/", "FGS")
   #PrenasmEvaluation = evaluateNasm(inputFiles)
 
   useColor = True
@@ -248,5 +249,6 @@ if __name__ == "__main__" :
   printEvaluationResult(sys.stdout, c3aEvaluation, useColor)
   printEvaluationResult(sys.stdout, PrenasmEvaluation, useColor)
   printEvaluationResult(sys.stdout, fgEvaluation, useColor)
+  printEvaluationResult(sys.stdout, fgsEvaluation, useColor)
 ################################################################################
 

@@ -189,7 +189,8 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
                 inst.label.accept(this) :
                 null;
 
-        NasmRegister reg_eax = new NasmRegister(Nasm.REG_EAX);
+        NasmRegister reg_eax = this.nasm.newRegister();
+        reg_eax.colorRegister(Nasm.REG_EAX);
         NasmLabel sinput = new NasmLabel("sinput");
         NasmLabel readline = new NasmLabel("readline");
         NasmLabel atoi = new NasmLabel("atoi");
@@ -481,8 +482,7 @@ public class C3a2nasm implements C3aVisitor<NasmOperand> {
                 inst.label.accept(this) :
                 null;
 
-//        NasmRegister reg_eax = this.nasm.newRegister();
-        NasmRegister reg_eax = new NasmRegister(Nasm.REG_EAX);
+        NasmRegister reg_eax = this.nasm.newRegister();
         reg_eax.colorRegister(Nasm.REG_EAX);
 
         NasmOperand exp = inst.op1.accept(this);

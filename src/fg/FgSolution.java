@@ -25,10 +25,9 @@ public class FgSolution implements NasmVisitor <Void>{
 
 
 	for (NasmInst inst : this.nasm.listeInst) {
+		addDefUse(inst);
 		inst.accept(this);
 	}
-
-
 
 
 
@@ -60,28 +59,37 @@ public class FgSolution implements NasmVisitor <Void>{
 
     public void addDefUse(NasmInst inst) {
 
-    	IntSet intSet = new IntSet(this.fg.inst2Node.size());
+    	IntSet defSet = new IntSet(this.fg.inst2Node.size());
+		IntSet useSet = new IntSet(this.fg.inst2Node.size());
 
-    	if (inst.destination.isGeneralRegister()) {
-			if (inst.destDef) {
+		if (inst.destination != null) {
+			if (inst.destination.isGeneralRegister()) {
+				if (inst.destDef) {
+					defSet.add(((NasmRegister) inst.destination).val);
+				}
 
+				if (inst.destUse) {
+					useSet.add(((NasmRegister) inst.destination).val);
+				}
 			}
+		}
 
-			if (inst.destUse) {
 
+		if (inst.source != null) {
+			if (inst.source.isGeneralRegister()) {
+				if (inst.srcDef) {
+					defSet.add(((NasmRegister) inst.source).val);
+				}
+
+				if (inst.srcUse) {
+					useSet.add(((NasmRegister) inst.source).val);
+				}
 			}
 		}
 
 
-    	if (inst.source.isGeneralRegister()) {
-			if (inst.srcDef) {
-
-			}
-
-			if (inst.srcUse) {
-
-			}
-		}
+    	this.def.put(inst, defSet);
+    	this.use.put(inst, useSet);
 
 	}
 

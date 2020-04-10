@@ -1,6 +1,7 @@
 import c3a.C3a;
 import c3a.C3aEval;
 import fg.Fg;
+import fg.FgSolution;
 import nasm.Nasm;
 import sc.parser.*;
 import sc.lexer.*;
@@ -78,6 +79,10 @@ public class Compiler
         Fg fg = new Fg(nasm);
         System.out.print("[PRINT FG] ");
         fg.affiche(baseName);
+
+        System.out.println("[FLOW GRAPH SOLVE]");
+        FgSolution fgSolution = new FgSolution(nasm, fg);
+        fgSolution.affiche(baseName);
 
 
 //
