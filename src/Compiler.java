@@ -78,6 +78,8 @@ public class Compiler
         Fg fg = new Fg(nasm);
         System.out.print("[PRINT FG] ");
         fg.affiche(baseName);
+
+
 //
 //        System.out.println("[PRINT NASM]");
 //        nasm.affiche(baseName);
