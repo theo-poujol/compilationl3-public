@@ -28,12 +28,48 @@ public class FgSolution implements NasmVisitor <Void>{
 
 	for (NasmInst inst : this.nasm.listeInst) {
 		addDefUse(inst);
+		this.out.put(inst, new IntSet(this.fg.inst2Node.size()));
+		this.in.put(inst, new IntSet(this.fg.inst2Node.size()));
+		inst.accept(this);
 //		inst.accept(this);
 	}
 
 	for (NasmInst inst : this.nasm.listeInst) {
-		addInOut(inst);
-		inst.accept(this);
+//		addInOut(inst);
+
+		IntSet inCopy = this.in.get(inst).copy();
+		IntSet outCopy = this.out.get(inst).copy();
+
+		// 1
+		this.in.put(inst, this.use.get(inst));
+
+		// 2
+
+		if (!(this.in.get(inst).isEmpty())) {
+			System.out.println(inst);
+			NodeList pred;
+
+			if ((pred = this.fg.inst2Node.get(inst).pred()) != null) {
+				System.out.println("PRED " + this.fg.node2Inst.get(pred.head));
+				while (pred.head != null) {
+					System.out.println(inst);
+
+					this.out.put(this.fg.node2Inst.get(pred.head), this.in.get(inst));
+
+					if (pred.tail == null) break;
+					else pred = pred.tail;
+				}
+			}
+		}
+
+
+		//3
+		IntSet var = this.out.get(inst);
+		if (!(var.isEmpty()) && var != this.def.get(inst)) this.in.put(inst, var);
+
+
+
+
 	}
 
 
@@ -112,7 +148,8 @@ public class FgSolution implements NasmVisitor <Void>{
 		IntSet defCopy = this.def.get(inst).copy();
 		IntSet useCopy = this.use.get(inst).copy();
 
-		IntSet outSet = new IntSet(this.fg.inst2Node.size());
+		IntSet outSet = this.out.get(inst).copy();
+//		IntSet outSet = new IntSet(this.fg.inst2Node.size());
 		IntSet inSet  = (useCopy.union((outSet.minus(defCopy))));
 
 
