@@ -45,6 +45,8 @@ public class FgSolution implements NasmVisitor <Void>{
 
 		// 2
 
+
+
 		if (!(this.in.get(inst).isEmpty())) {
 			System.out.println(inst);
 			NodeList pred;
@@ -55,7 +57,6 @@ public class FgSolution implements NasmVisitor <Void>{
 					System.out.println(inst);
 
 					this.out.put(this.fg.node2Inst.get(pred.head), this.in.get(inst));
-
 					if (pred.tail == null) break;
 					else pred = pred.tail;
 				}
@@ -65,7 +66,12 @@ public class FgSolution implements NasmVisitor <Void>{
 
 		//3
 		IntSet var = this.out.get(inst);
-		if (!(var.isEmpty()) && var != this.def.get(inst)) this.in.put(inst, var);
+		System.out.println("VAR " + var);
+		if (!(var.isEmpty())) {
+			System.out.println("JE RENTRE");
+//			this.in.get(inst).union(var);
+			this.in.put(inst, var);
+		}
 
 
 

@@ -3,6 +3,7 @@ package util.intset;
 public class IntSet{
     private int size;
     private boolean array[];
+
     
     public IntSet(int size){
 	this.size = size;
@@ -34,6 +35,7 @@ public class IntSet{
 
     
     public void add(int elt){
+
 	if(elt >= size){
 	    System.err.println("ERROR : set is too small !!!!");
 	}
