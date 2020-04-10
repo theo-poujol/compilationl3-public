@@ -144,48 +144,92 @@ public class Fg implements NasmVisitor <Void> {
     }
 
     public Void visit(NasmJe inst) {
-        addSimpleEdge(inst, this.inst2Node.get(inst));
+
 
         Node nodeJump = null;
-        for (NasmInst posInst : this.nasm.listeInst) {
-            if (inst.address.equals(posInst.label)) {
-                nodeJump = this.inst2Node.get(posInst);
-                break;
+
+
+        for (NasmInst instJump : this.nasm.listeInst) {
+
+
+            NasmLabel instLabel = (NasmLabel) inst.address;
+            if (instJump.label != null)
+            {
+                NasmLabel instCallLabel = (NasmLabel) instJump.label;
+                if (instCallLabel.val.equals(instLabel.val)) {
+                    nodeJump = this.inst2Node.get(instJump);
+                    break;
+                }
             }
+
         }
 
-        this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+
+        if (nodeJump != null) {
+            this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+            this.node2Inst.get(nodeJump).accept(this);
+        }
+
+        addSimpleEdge(inst, this.inst2Node.get(inst));
         return null;
     }
 
 
     public Void visit(NasmJle inst)  {
-        addSimpleEdge(inst, this.inst2Node.get(inst));
-
         Node nodeJump = null;
-        for (NasmInst posInst : this.nasm.listeInst) {
-            if (inst.address.equals(posInst.label)) {
-                nodeJump = this.inst2Node.get(posInst);
-                break;
+
+
+        for (NasmInst instJump : this.nasm.listeInst) {
+
+
+            NasmLabel instLabel = (NasmLabel) inst.address;
+            if (instJump.label != null)
+            {
+                NasmLabel instCallLabel = (NasmLabel) instJump.label;
+                if (instCallLabel.val.equals(instLabel.val)) {
+                    nodeJump = this.inst2Node.get(instJump);
+                    break;
+                }
             }
+
         }
 
-        this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+
+        if (nodeJump != null) {
+            this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+            this.node2Inst.get(nodeJump).accept(this);
+        }
+
+        addSimpleEdge(inst, this.inst2Node.get(inst));
         return null;
     }
 
     public Void visit(NasmJne inst) {
-        addSimpleEdge(inst, this.inst2Node.get(inst));
-
         Node nodeJump = null;
-        for (NasmInst posInst : this.nasm.listeInst) {
-            if (inst.address.equals(posInst.label)) {
-                nodeJump = this.inst2Node.get(posInst);
-                break;
+
+
+        for (NasmInst instJump : this.nasm.listeInst) {
+
+
+            NasmLabel instLabel = (NasmLabel) inst.address;
+            if (instJump.label != null)
+            {
+                NasmLabel instCallLabel = (NasmLabel) instJump.label;
+                if (instCallLabel.val.equals(instLabel.val)) {
+                    nodeJump = this.inst2Node.get(instJump);
+                    break;
+                }
             }
+
         }
 
-        this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+
+        if (nodeJump != null) {
+            this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+            this.node2Inst.get(nodeJump).accept(this);
+        }
+
+        addSimpleEdge(inst, this.inst2Node.get(inst));
         return null;
     }
 
@@ -216,32 +260,60 @@ public class Fg implements NasmVisitor <Void> {
     }
 
     public Void visit(NasmJge inst) {
-        addSimpleEdge(inst, this.inst2Node.get(inst));
-
         Node nodeJump = null;
-        for (NasmInst posInst : this.nasm.listeInst) {
-            if (inst.address.equals(posInst.label)) {
-                nodeJump = this.inst2Node.get(posInst);
-                break;
+
+
+        for (NasmInst instJump : this.nasm.listeInst) {
+
+
+            NasmLabel instLabel = (NasmLabel) inst.address;
+            if (instJump.label != null)
+            {
+                NasmLabel instCallLabel = (NasmLabel) instJump.label;
+                if (instCallLabel.val.equals(instLabel.val)) {
+                    nodeJump = this.inst2Node.get(instJump);
+                    break;
+                }
             }
+
         }
 
-        this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+
+        if (nodeJump != null) {
+            this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+            this.node2Inst.get(nodeJump).accept(this);
+        }
+
+        addSimpleEdge(inst, this.inst2Node.get(inst));
         return null;
     }
 
     public Void visit(NasmJl inst) {
-        addSimpleEdge(inst, this.inst2Node.get(inst));
-
         Node nodeJump = null;
-        for (NasmInst posInst : this.nasm.listeInst) {
-            if (inst.address.equals(posInst.label)) {
-                nodeJump = this.inst2Node.get(posInst);
-                break;
+
+
+        for (NasmInst instJump : this.nasm.listeInst) {
+
+
+            NasmLabel instLabel = (NasmLabel) inst.address;
+            if (instJump.label != null)
+            {
+                NasmLabel instCallLabel = (NasmLabel) instJump.label;
+                if (instCallLabel.val.equals(instLabel.val)) {
+                    nodeJump = this.inst2Node.get(instJump);
+                    break;
+                }
             }
+
         }
 
-        this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+
+        if (nodeJump != null) {
+            this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+            this.node2Inst.get(nodeJump).accept(this);
+        }
+
+        addSimpleEdge(inst, this.inst2Node.get(inst));
         return null;
     }
 
@@ -288,31 +360,59 @@ public class Fg implements NasmVisitor <Void> {
 
     public Void visit(NasmJg inst) {
 
-        addSimpleEdge(inst, this.inst2Node.get(inst));
-
         Node nodeJump = null;
-        for (NasmInst posInst : this.nasm.listeInst) {
-            if (inst.address.equals(posInst.label)) {
-                nodeJump = this.inst2Node.get(posInst);
-                break;
+
+
+        for (NasmInst instJump : this.nasm.listeInst) {
+
+
+            NasmLabel instLabel = (NasmLabel) inst.address;
+            if (instJump.label != null)
+            {
+                NasmLabel instCallLabel = (NasmLabel) instJump.label;
+                if (instCallLabel.val.equals(instLabel.val)) {
+                    nodeJump = this.inst2Node.get(instJump);
+                    break;
+                }
             }
+
         }
 
-        this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+
+        if (nodeJump != null) {
+            this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+            this.node2Inst.get(nodeJump).accept(this);
+        }
+
+        addSimpleEdge(inst, this.inst2Node.get(inst));
         return null;
     }
 
     public Void visit(NasmJmp inst) {
 
         Node nodeJump = null;
-        for (NasmInst posInst : this.nasm.listeInst) {
-            if (inst.address.equals(posInst.label)) {
-                nodeJump = this.inst2Node.get(posInst);
-                break;
+
+
+        for (NasmInst instJump : this.nasm.listeInst) {
+
+
+            NasmLabel instLabel = (NasmLabel) inst.address;
+            if (instJump.label != null)
+            {
+                NasmLabel instCallLabel = (NasmLabel) instJump.label;
+                if (instCallLabel.val.equals(instLabel.val)) {
+                    nodeJump = this.inst2Node.get(instJump);
+                    break;
+                }
             }
+
         }
 
-        this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+
+        if (nodeJump != null) {
+            this.graph.addEdge(this.inst2Node.get(inst),nodeJump);
+            this.node2Inst.get(nodeJump).accept(this);
+        }
         return null;
     }
 
