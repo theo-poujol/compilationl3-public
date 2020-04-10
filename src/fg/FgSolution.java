@@ -30,12 +30,10 @@ public class FgSolution implements NasmVisitor <Void>{
 		addDefUse(inst);
 		this.out.put(inst, new IntSet(this.fg.inst2Node.size()));
 		this.in.put(inst, new IntSet(this.fg.inst2Node.size()));
-		inst.accept(this);
 //		inst.accept(this);
 	}
 
 	for (NasmInst inst : this.nasm.listeInst) {
-//		addInOut(inst);
 
 		IntSet inCopy = this.in.get(inst).copy();
 		IntSet outCopy = this.out.get(inst).copy();
@@ -52,30 +50,35 @@ public class FgSolution implements NasmVisitor <Void>{
 			NodeList pred;
 
 			if ((pred = this.fg.inst2Node.get(inst).pred()) != null) {
-				System.out.println("PRED " + this.fg.node2Inst.get(pred.head));
 				while (pred.head != null) {
-					System.out.println(inst);
 
 					this.out.put(this.fg.node2Inst.get(pred.head), this.in.get(inst));
+//					IntSet copy = this.out.get(this.fg.node2Inst.get(pred.head)).copy();
+//					copy.union(this.in.get(inst));
+//					this.out.put(this.fg.node2Inst.get(pred.head), copy);
 					if (pred.tail == null) break;
 					else pred = pred.tail;
 				}
 			}
 		}
+	}
 
-
+	for (NasmInst inst : this.nasm.listeInst) {
 		//3
-		IntSet var = this.out.get(inst);
-		System.out.println("VAR " + var);
-		if (!(var.isEmpty())) {
-			System.out.println("JE RENTRE");
-//			this.in.get(inst).union(var);
-			this.in.put(inst, var);
+
+		if (!(this.out.get(inst).isEmpty())) {
+			IntSet copy = this.out.get(inst).copy();
+			if ((copy.inter(this.def.get(inst))).isEmpty())
+
+
+				System.out.println("JE RENTRE");
+				System.out.println("VAR " + this.out.get(inst));
+//				this.in.put(inst, this.out.get(inst));
+			System.out.println("TRUC A ADD "  + this.out.get(inst));
+				this.in.get(inst).union(this.out.get(inst));
+
+//			this.in.put(inst, var);
 		}
-
-
-
-
 	}
 
 
@@ -155,7 +158,6 @@ public class FgSolution implements NasmVisitor <Void>{
 		IntSet useCopy = this.use.get(inst).copy();
 
 		IntSet outSet = this.out.get(inst).copy();
-//		IntSet outSet = new IntSet(this.fg.inst2Node.size());
 		IntSet inSet  = (useCopy.union((outSet.minus(defCopy))));
 
 
