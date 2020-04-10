@@ -2,6 +2,8 @@ package fg;
 import util.graph.*;
 import nasm.*;
 import util.intset.*;
+
+import java.awt.*;
 import java.io.*;
 import java.util.*;
 
@@ -26,8 +28,14 @@ public class FgSolution implements NasmVisitor <Void>{
 
 	for (NasmInst inst : this.nasm.listeInst) {
 		addDefUse(inst);
+//		inst.accept(this);
+	}
+
+	for (NasmInst inst : this.nasm.listeInst) {
+		addInOut(inst);
 		inst.accept(this);
 	}
+
 
 
 
@@ -62,6 +70,7 @@ public class FgSolution implements NasmVisitor <Void>{
     	IntSet defSet = new IntSet(this.fg.inst2Node.size());
 		IntSet useSet = new IntSet(this.fg.inst2Node.size());
 
+
 		if (inst.destination != null) {
 			if (inst.destination.isGeneralRegister()) {
 				if (inst.destDef) {
@@ -73,7 +82,6 @@ public class FgSolution implements NasmVisitor <Void>{
 				}
 			}
 		}
-
 
 		if (inst.source != null) {
 			if (inst.source.isGeneralRegister()) {
@@ -90,6 +98,51 @@ public class FgSolution implements NasmVisitor <Void>{
 
     	this.def.put(inst, defSet);
     	this.use.put(inst, useSet);
+
+
+
+
+	}
+
+
+	public void addInOut(NasmInst inst) {
+
+
+
+		IntSet defCopy = this.def.get(inst).copy();
+		IntSet useCopy = this.use.get(inst).copy();
+
+		IntSet outSet = new IntSet(this.fg.inst2Node.size());
+		IntSet inSet  = (useCopy.union((outSet.minus(defCopy))));
+
+
+		NodeList succ = this.fg.inst2Node.get(inst).succ();
+		ArrayList<IntSet> array = new ArrayList<>();
+
+		if (succ != null) {
+
+			while (succ.tail != null) {
+				IntSet in = this.in.get(this.fg.node2Inst.get(succ.head));
+				array.add(in);
+				if (succ.tail != null) succ = succ.tail;
+			}
+
+			IntSet inSum = new IntSet(this.fg.inst2Node.size());
+			IntSet res = new IntSet(this.fg.inst2Node.size());
+
+			for  (IntSet in : array) {
+				res = inSum.union(in);
+				inSum = res;
+			}
+
+			outSet = res;
+
+
+		}
+
+		this.in.put(inst, inSet);
+		this.out.put(inst, outSet);
+
 
 	}
 
