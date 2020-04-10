@@ -131,14 +131,19 @@ public class FgSolution implements NasmVisitor <Void>{
 			IntSet res = new IntSet(this.fg.inst2Node.size());
 
 			for  (IntSet in : array) {
+
+
 				res = inSum.union(in);
 				inSum = res;
+				System.out.println("JE RENTRE");
 			}
 
 			outSet = res;
 
 
 		}
+
+
 
 		this.in.put(inst, inSet);
 		this.out.put(inst, outSet);
